@@ -3,6 +3,7 @@ import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Home/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Home/Footer";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
                 <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
                     <Navbar />
                     {children}
+                    <Footer/>
                 </body>
             </html>
         </ClerkProvider>
