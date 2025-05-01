@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Home/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Home/Footer";
+import StoreProvider from "@/StoreProvider/StoreProvider";
+import { Toaster } from "sonner";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -28,14 +30,17 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider>
-            <html lang="en">
-                <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
-                    <Navbar />
-                    {children}
-                    <Footer/>
-                </body>
-            </html>
-        </ClerkProvider>
+        <StoreProvider>
+            <ClerkProvider>
+                <html lang="en">
+                    <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
+                        <Navbar />
+                        {children}
+                        <Toaster/>
+                        <Footer />
+                    </body>
+                </html>
+            </ClerkProvider>
+        </StoreProvider>
     );
 }

@@ -1,10 +1,13 @@
 "use client";
 
+import { addItem } from "@/store/cartSlice";
 import { Product } from "@/typing";
-import { Heart, ShoppingBasket, ShoppingCartIcon, StarIcon } from "lucide-react";
+import { Heart, ShoppingCart, ShoppingCartIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 
 type Props = {
     product: Product;
@@ -13,7 +16,18 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
     const num = Math.round(product.rating.rate);
     const ratingArray = new Array(num).fill(0);
+    
+    const dispatch = useDispatch();
 
+    const addToCartHandler = (product: Product) => {
+        dispatch(addItem(product));
+        toast.success(`"${product.title}" Added to Cart`, {
+            description: "Its now availiable in your shopping cart.",
+            icon: <ShoppingCart className="text-emerald-500" size={18}/>,
+            className: "bg-white border border-emerald-500 text-emerald-700",
+            duration: 3000
+        })
+    };
     return (
         <div className="p-4">
             <div className="w-[200px] h-[150px]">
@@ -43,11 +57,15 @@ const ProductCard = ({ product }: Props) => {
                 <p className="text-black text-lg font-semibold opacity-80">${product.price}</p>
             </div>
             <div className="mt-4 flex items-center space-x-2">
-                <button>
-                    <ShoppingCartIcon size={18}/>
+                <button
+                    onClick={() => {
+                        addToCartHandler(product);
+                    }}
+                >
+                    <ShoppingCartIcon size={18} />
                 </button>
                 <button>
-                    <Heart size={18}/>
+                    <Heart size={18} />
                 </button>
             </div>
         </div>
