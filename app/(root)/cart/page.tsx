@@ -24,8 +24,8 @@ const Cart = () => {
         dispatch(addItem(item))
     }
 
-    const removeItemCart = (id: number) => {
-        dispatch(removeItem({id}))
+    const removeItemCart = (id: number, size: number[]) => {
+        dispatch(removeItem({id, size}))
     }
 
     return (
@@ -64,10 +64,11 @@ const Cart = () => {
                                             <h1>category: {item.category}</h1>
                                             <h1>$ {item.price}</h1>
                                             <h1>quantity: {item.quantity}</h1>
+                                            {item.sizes && <h1>Size: {item.sizes}</h1>}
                                         </div>
                                         <div className="flex items-center mt-4 space-x-2">
                                             <button onClick={() => {addItemCart(item)}} className="bg-red-400">Add more</button>
-                                            <button onClick={() => removeItemCart(item.id)}  className="bg-red-200">Remove</button>
+                                            <button onClick={() => removeItemCart(item.id, item.sizes)}  className="bg-red-200">Remove</button>
                                         </div>
                                     </div>
                                 </div>

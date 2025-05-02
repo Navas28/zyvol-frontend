@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface CartItem {
-    id: number;
+    id: string;
     title: string;
     price: number;
     category: string;
     image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
     quantity: number;
+    size: number;
 }
 interface CartState {
     items: CartItem[];
@@ -22,20 +19,24 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action: PayloadAction<Omit<CartItem, "quantity">>) => {
-            const existingItem = state.items.find((item) => item.id === action.payload.id);
+            const existingItem = state.items.find((item) => item.id === action.payload.id && item.size === action.payload.size);
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
                 state.items.push({ ...action.payload, quantity: 1 });
             }
         },
-        removeItem: (state, action: PayloadAction<{ id: number }>) => {
-            const existingItem = state.items.find((item) => item.id === action.payload.id);
+        removeItem: (state, action: PayloadAction<{ id: string; size: number }>) => {
+            const existingItem = state.items.find(
+                (item) => item.id === action.payload.id && item.size === action.payload.size
+            );
             if (existingItem) {
                 if (existingItem.quantity > 1) {
                     existingItem.quantity -= 1;
                 } else {
-                    state.items = state.items.filter((item) => item.id != action.payload.id);
+                    state.items = state.items.filter(
+                        (item) => item.id !== action.payload.id || item.size !== action.payload.size
+                    );
                 }
             }
         },
