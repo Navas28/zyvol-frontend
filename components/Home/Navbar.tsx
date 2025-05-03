@@ -5,6 +5,7 @@ import SearchBox from "../Helper/SearchBox";
 import { Heart, UserIcon } from "lucide-react";
 import ShopingCartButton from "../Helper/ShopingCartButton";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import FavoriteButton from "../Helper/FavoriteButton";
 
 const Navbar = () => {
     return (
@@ -15,7 +16,7 @@ const Navbar = () => {
                 </Link>
                 <div className="flex items-center space-x-6">
                     <SearchBox />
-                    <Heart size={26} cursor={"pointer"} />
+                    <FavoriteButton />
                     <ShopingCartButton />
 
                     <SignedIn>

@@ -14,7 +14,6 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
         }
     } catch (error) {
         console.error('Error fetching product data:', error);
-        // Handle the error or return a fallback UI here
     }
 
     if (!singleProduct) {

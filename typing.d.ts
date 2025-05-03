@@ -13,7 +13,7 @@ export interface Product {
         importedBy: string;
         weight: string;
     };
-    size: number;
+    sizes: number[];
     additionalImages: string[];
     createdAt: string;
     updatedAt: string;

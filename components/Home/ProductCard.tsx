@@ -1,12 +1,14 @@
 "use client";
 
 import { addItem } from "@/store/cartSlice";
+import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
 import { Product } from "@/typing";
-import { Heart, ShoppingCart, ShoppingCartIcon, StarIcon, X } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
+import { Heart, ShoppingCartIcon, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 type Props = {
@@ -14,19 +16,26 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
+    const {isLoaded, isSignedIn, user} = useUser()
+    const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [selectedSize, setSelectedSize] = useState<number | null>(null);
+   
+    const favorites = useSelector((state: any) => state.favorites.items);
+    const isFavorite = favorites.some((item: Product) => item._id === product._id);
+    
 
-    const availableSizes = [4, 5, 6, 7, 8, 9, 10];
-
-    const dispatch = useDispatch();
+    const allSizes = [4, 5, 6, 7, 8, 9, 10];
 
     const handleAddtoCart = () => {
         if (!selectedSize) {
             toast.error("Select a size to add to cart");
             return;
         }
-
+        if(!isLoaded || !isSignedIn){
+            toast.error("Please log in to add items to your cart.");
+            return;
+        }
         dispatch(
             addItem({
                 id: product._id,
@@ -39,7 +48,26 @@ const ProductCard = ({ product }: Props) => {
         );
         setShowModal(false);
         setSelectedSize(null);
+        toast.success(`"${product.title}" added to cart!`);
     };
+
+    const handleFavoriteToggle = () => {
+        if (!isLoaded || !isSignedIn) {
+            toast.error("Please log in to add to favorites.");
+            return;
+        }
+        if(isFavorite){
+            dispatch(removeFavorite(product._id))
+            toast.success(`"${product.title}" removed from favorites!`, {
+                icon: <Heart size={18} className="text-red-600" />,
+            });
+        }else{
+            dispatch(addFavorite(product));
+            toast.success(`"${product.title}" added to favorites!`, {
+                icon: <Heart size={18} className="text-red-600" />,
+            });
+        }
+    }
 
     return (
         <div className="p-4 relative">
@@ -65,12 +93,24 @@ const ProductCard = ({ product }: Props) => {
                 <p className="text-black text-lg font-semibold opacity-80">${product.price}</p>
             </div>
             <div className="mt-4 flex items-center space-x-2">
-                <button onClick={() => setShowModal(true)}>
-                    <ShoppingCartIcon size={18} />
-                </button>
-                <button>
-                    <Heart size={18} />
-                </button>
+            {isLoaded && isSignedIn  ? (
+                    <button onClick={() => setShowModal(true)}>
+                        <ShoppingCartIcon size={18} />
+                    </button>
+                ) : (
+                    <button className="cursor-not-allowed opacity-50" disabled>
+                        <ShoppingCartIcon size={18} />
+                    </button>
+                )}
+                {isLoaded && isSignedIn  ? (
+                    <button onClick={handleFavoriteToggle}>
+                        <Heart size={18} className={isFavorite ? "text-red-600" : "text-gray-600"} />
+                    </button>
+                ) : (
+                    <button className="cursor-not-allowed opacity-50" disabled>
+                        <Heart size={18} className="text-gray-600" />
+                    </button>
+                )}
             </div>
 
             {showModal && (
@@ -84,17 +124,26 @@ const ProductCard = ({ product }: Props) => {
                         </button>
                         <h2 className="text-lg font-semibold mb-4">Select Size</h2>
                         <div className="flex flex-wrap gap-2">
-                            {availableSizes.map((size) => (
-                                <button
-                                    key={size}
-                                    className={`px-3 py-1 rounded border ${
-                                        selectedSize === size ? "bg-black text-white" : "bg-white text-black"
-                                    }`}
-                                    onClick={() => setSelectedSize(size)}
-                                >
-                                    {size}
-                                </button>
-                            ))}
+                        {allSizes.map((size) => {
+                                const isAvailable = product.sizes?.includes(size);
+
+                                return (
+                                    <button
+                                        key={size}
+                                        disabled={!isAvailable}
+                                        className={`px-3 py-1 rounded border transition ${
+                                            !isAvailable
+                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                : selectedSize === size
+                                                ? "bg-black text-white"
+                                                : "bg-white text-black hover:bg-gray-100"
+                                        }`}
+                                        onClick={() => isAvailable && setSelectedSize(size)}
+                                    >
+                                        {size}
+                                    </button>
+                                );
+                            })}
                         </div>
                         <button onClick={handleAddtoCart} className="mt-4 bg-black text-white w-full py-2 rounded">
                             Confirm Add to Cart

@@ -9,28 +9,33 @@ import ProductCard from "@/components/Home/ProductCard";
 import { useDispatch } from "react-redux";
 import { addItem } from "@/store/cartSlice";
 import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 const ProductDetailsClient = ({ product, relatedProduct }: { product: Product, relatedProduct: Product[] }) => {
+    const {isLoaded,isSignedIn} = useUser();
     const [selectedSize, setSelectedSize] = useState<number | null>(null);
     const dispatch = useDispatch();
-
-    const num = Math.round(product?.rating?.rate);
-    const starArray = new Array(num).fill(0);
 
     const handleSize = (size: number) => {
         setSelectedSize(size);
     };
 
-    const handleAddtoCart = () => {
+    const handleAddtoCart = () => { 
+        if (!isLoaded || !isSignedIn) {
+            toast.error("Please sign in to add items to your cart.", {
+                icon: <TriangleAlert className="text-red-600" />,
+                duration: 3000,
+            });
+            return;
+        }
         if (selectedSize) {
             dispatch(
                 addItem({
-                    id: product.id,
+                    id: product._id,
                     title: product.title,
                     price: product.price,
                     category: product.category,
                     image: product.image,
-                    rating: product.rating,
                     size: selectedSize,
                 })
             );
@@ -56,12 +61,6 @@ const ProductDetailsClient = ({ product, relatedProduct }: { product: Product, r
         </div>
         <div className="col-span-4">
             <h1 className="lg:text-3xl text-2xl font-bold text-black">{product.title}</h1>
-            <div className="mt-2 flex items-center space-x-2">
-                {starArray.map((star) => (
-                    <StarIcon key={Math.random() * 5000} size={20} fill="yellow" className="text-yellow-600" />
-                ))}
-            </div>
-            <p className="text-base text-gray-700 font-semibold">({product?.rating.count} Reviews)</p>
             <span className="w-1/4 h-[1.6px] bg-gray-400 rounded-lg block mt-4 opacity-20 mb-4"></span>
             <h1 className="lg:text-6xl text-3xl text-blue-950 font-bold">${product?.price.toFixed(2)}</h1>
             <p className="mt-4 text-base text-black opacity-70">{product?.description}</p>
@@ -69,7 +68,6 @@ const ProductDetailsClient = ({ product, relatedProduct }: { product: Product, r
                 Category: {product?.category}
             </p>
 
-            {/* Size Selection */}
             <div className="mt-4">
                 <p className="text-sm text-black text-opacity-70 font-semibold">Select Size</p>
                 <select
@@ -88,7 +86,10 @@ const ProductDetailsClient = ({ product, relatedProduct }: { product: Product, r
 
             <button
                 onClick={handleAddtoCart}
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md"
+                className={`mt-4 px-6 py-2 rounded-md ${
+                    !isSignedIn ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 text-white"
+                }`}
+                disabled={!isSignedIn}
             >
                 Add to Cart
             </button>
@@ -100,8 +101,8 @@ const ProductDetailsClient = ({ product, relatedProduct }: { product: Product, r
         <div className="w-4/5 mt-16 mx-auto">
             <h1 className="text-2xl text-black font-semibold">Related Products</h1>
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-                {relatedProduct.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                {relatedProduct.map((relatedPro) => (
+                    <ProductCard key={relatedPro._id} product={product} />
                 ))}
             </div>
         </div>

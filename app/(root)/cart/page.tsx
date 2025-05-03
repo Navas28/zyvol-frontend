@@ -2,7 +2,7 @@
 
 import { CartItem } from "@/store/cartSlice";
 import { RootState } from "@/store/store";
-import { useUser } from "@clerk/nextjs";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -11,22 +11,20 @@ import { addItem } from "@/store/cartSlice";
 import { removeItem } from "@/store/cartSlice";
 
 const Cart = () => {
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const items = useSelector((state: RootState) => state.cart.items);
     const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
     const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
     const discount = totalPrice * 0.05;
     const finalPrice = (totalPrice - discount).toFixed(2);
-    const {user} = useUser();
 
     const addItemCart = (item: CartItem) => {
-        dispatch(addItem(item))
-    }
+        dispatch(addItem(item));
+    };
 
-    const removeItemCart = (id: number, size: number[]) => {
-        dispatch(removeItem({id, size}))
-    }
+    const removeItemCart = (id: string, size: number) => {
+        dispatch(removeItem({ id, size }));
+    };
 
     return (
         <div className="mt-8 min-h-[60vh]">
@@ -64,11 +62,23 @@ const Cart = () => {
                                             <h1>category: {item.category}</h1>
                                             <h1>$ {item.price}</h1>
                                             <h1>quantity: {item.quantity}</h1>
-                                            {item.sizes && <h1>Size: {item.sizes}</h1>}
+                                            {item.size && <h1>Size: {item.size}</h1>}
                                         </div>
                                         <div className="flex items-center mt-4 space-x-2">
-                                            <button onClick={() => {addItemCart(item)}} className="bg-red-400">Add more</button>
-                                            <button onClick={() => removeItemCart(item.id, item.sizes)}  className="bg-red-200">Remove</button>
+                                            <button
+                                                onClick={() => {
+                                                    addItemCart(item);
+                                                }}
+                                                className="bg-red-400"
+                                            >
+                                                Add more
+                                            </button>
+                                            <button
+                                                onClick={() => removeItemCart(item.id, item.size)}
+                                                className="bg-red-200"
+                                            >
+                                                Remove
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -96,17 +106,9 @@ const Cart = () => {
                                 <span>Total</span>
                                 <span>${finalPrice}</span>
                             </div>
-                            {!user && (
-                                <Link href="/sign-in">
-                                    <button className="bg-amber-600 w-full">Sign In to Checkout</button>
-                                </Link>
-                            )}
-                            {
-                                user && (
-                                    <button className="bg-amber-300">Pay now</button>
-                                )
-                            }
-                        </div>                          
+
+                            <button className="bg-amber-300">Pay now</button>
+                        </div>
                     </div>
                 </div>
             )}

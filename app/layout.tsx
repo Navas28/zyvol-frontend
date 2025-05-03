@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Home/Footer";
 import StoreProvider from "@/StoreProvider/StoreProvider";
 import { Toaster } from "sonner";
+import AuthSync from "@/components/Auth/AuthSync";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
             <ClerkProvider>
                 <html lang="en">
                     <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
+                        <AuthSync/>
                         <Navbar />
                         {children}
                         <Toaster/>

@@ -13,7 +13,7 @@ const CartSidebar = ({ items }: Props) => {
     const dispatch = useDispatch();
 
     const addCart = (item: CartItem) => dispatch(addItem(item));
-    const removeCart = (id: number, size: number) => {
+    const removeCart = (id: string, size: number) => {
         dispatch(removeItem({ id, size }));
       };
 
