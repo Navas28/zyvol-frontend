@@ -1,4 +1,5 @@
 export interface Product {
+    name: string | undefined;
     _id: string;
     title: string;
     price: number;

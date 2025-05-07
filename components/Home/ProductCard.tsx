@@ -80,7 +80,7 @@ const ProductCard = ({ product }: Props) => {
                     height={100}
                 />
             </div>
-            <p className="mt-5 text-xs capitalize text-gray-600">{product.category}</p>
+            <p className="mt-5 text-xs capitalize text-gray-600">{product.brand}</p>
             <Link href={`/product/product-details/${product._id}`}>
                 <h1 className="text-lg cursor-pointer hover:text-blue-900 transition-all hover:underline sm:w-full sm:truncate mt-2 text-black font-semibold">
                     {product.title}

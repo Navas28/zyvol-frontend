@@ -2,10 +2,6 @@
 
 import * as React from "react"
 import {
-  ArrowUpRightIcon,
-  CircleFadingPlusIcon,
-  FileInputIcon,
-  FolderPlusIcon,
   SearchIcon,
 } from "lucide-react"
 
@@ -15,13 +11,19 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
+  CommandList
 } from "@/components/ui/command"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import Link from "next/link"
 
-export default function Component() {
+export default function SearchBox() {
   const [open, setOpen] = React.useState(false)
+  const [searchTerm, setSearchTerm] = React.useState("")
+
+  const products = useSelector((state: RootState) => state.product.products)
+
+  const filteredProducts = searchTerm ? products.filter((product) => product.title.toLowerCase().startsWith(searchTerm.toLowerCase())) : []
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -38,7 +40,7 @@ export default function Component() {
   return (
     <>
       <button
-        className="border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-fit rounded-md border px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
+        className="border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 shadow-md w-[40%] rounded-md border px-6 py-5 text-sm  transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
         onClick={() => setOpen(true)}
       >
         <span className="flex grow items-center">
@@ -49,69 +51,21 @@ export default function Component() {
           />
           <span className="text-muted-foreground/70 font-normal">Search</span>
         </span>
-        <kbd className="bg-background text-muted-foreground/70 ms-12 -me-1 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[0.625rem] font-medium">
+        <kbd className="bg-background text-muted-foreground/70 ms-12 -me-1 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[1.2rem] font-medium">
           ⌘K
         </kbd>
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder="Search sneakers..." value={searchTerm} onValueChange={setSearchTerm} />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Quick start">
-            <CommandItem>
-              <FolderPlusIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>New folder</span>
-              <CommandShortcut className="justify-center">⌘N</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <FileInputIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Import document</span>
-              <CommandShortcut className="justify-center">⌘I</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CircleFadingPlusIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Add block</span>
-              <CommandShortcut className="justify-center">⌘B</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Navigation">
-            <CommandItem>
-              <ArrowUpRightIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Go to dashboard</span>
-            </CommandItem>
-            <CommandItem>
-              <ArrowUpRightIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Go to apps</span>
-            </CommandItem>
-            <CommandItem>
-              <ArrowUpRightIcon
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Go to connections</span>
-            </CommandItem>
+          <CommandGroup heading="Results">
+            {filteredProducts.map((product) => 
+            <Link key={product._id} href={`/product/product-details/${product._id}`} onClick={() => setOpen(false)}>
+                <CommandItem>
+                  {product.title}
+                </CommandItem>
+            </Link>)}
           </CommandGroup>
         </CommandList>
       </CommandDialog>
