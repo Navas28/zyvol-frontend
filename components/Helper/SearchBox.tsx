@@ -49,7 +49,7 @@ export default function SearchBox() {
             size={16}
             aria-hidden="true"
           />
-          <span className="text-muted-foreground/70 font-normal">Search</span>
+          <span className="text-muted-foreground/80 font-rob">Search</span>
         </span>
         <kbd className="bg-background text-muted-foreground/70 ms-12 -me-1 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[1.2rem] font-medium">
           ⌘K
@@ -59,7 +59,7 @@ export default function SearchBox() {
         <CommandInput placeholder="Search sneakers..." value={searchTerm} onValueChange={setSearchTerm} />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Results">
+          <CommandGroup>
             {filteredProducts.map((product) => 
             <Link key={product._id} href={`/product/product-details/${product._id}`} onClick={() => setOpen(false)}>
                 <CommandItem>

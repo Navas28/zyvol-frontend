@@ -16,7 +16,7 @@ const FavoriteButton = () => {
         <SheetTrigger>
             <div className='relative'>
                 {totalFavorites > 0 && (
-                    <span className='absolute -top-3 -right-2 w-6 h-6  text-center flex items-center justify-center text-white bg-red-500 rounded-full text-sm'>
+                    <span className='absolute -top-3 -right-2 w-6 h-6  text-center flex items-center justify-center text-white bg-green rounded-full text-sm font-semibold'>
                         {totalFavorites}
                     </span>
                 )}

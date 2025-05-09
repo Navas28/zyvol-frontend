@@ -15,7 +15,7 @@ const ShopingCartButton = () => {
             <SheetTrigger>
                 <div className="relative">
                     {totalQuantity > 0 && (
-                        <span className="absolute -top-3 -right-2 w-6 h-6 bg-red-500 text-center flex items-center justify-center text-white rounded-full text-sm">
+                        <span className="absolute -top-3 -right-2 w-6 h-6 bg-green text-center flex items-center justify-center text-white rounded-full text-sm font-semibold">
                             {totalQuantity}
                         </span>
                     )}

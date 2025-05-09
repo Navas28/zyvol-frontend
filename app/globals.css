@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 @theme inline {
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -74,6 +75,19 @@
   --color-sidebar-border: var(--sidebar-border);
 
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-pop: Poppins;
+
+  --font-rob: Roboto;
+
+  --color-yellow: #fa9a43;
+
+  --color-gray: #525E68;
+
+  --color-green: #12392a;
+  
+  --color-red: #ab052d;
+
 
 }
 

@@ -10,64 +10,37 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import ComponentModal from "../comp-323";
 
 type Props = {
     product: Product;
 };
 
 const ProductCard = ({ product }: Props) => {
-    const {isLoaded, isSignedIn, user} = useUser()
+    const { isLoaded, isSignedIn, user } = useUser();
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
-    const [selectedSize, setSelectedSize] = useState<number | null>(null);
-   
+
     const favorites = useSelector((state: any) => state.favorites.items);
     const isFavorite = favorites.some((item: Product) => item._id === product._id);
-    
-
-    const allSizes = [4, 5, 6, 7, 8, 9, 10];
-
-    const handleAddtoCart = () => {
-        if (!selectedSize) {
-            toast.error("Select a size to add to cart");
-            return;
-        }
-        if(!isLoaded || !isSignedIn){
-            toast.error("Please log in to add items to your cart.");
-            return;
-        }
-        dispatch(
-            addItem({
-                id: product._id,
-                title: product.title,
-                price: product.price,
-                category: product.category,
-                image: product.image,
-                size: selectedSize,
-            })
-        );
-        setShowModal(false);
-        setSelectedSize(null);
-        toast.success(`"${product.title}" added to cart!`);
-    };
 
     const handleFavoriteToggle = () => {
         if (!isLoaded || !isSignedIn) {
             toast.error("Please log in to add to favorites.");
             return;
         }
-        if(isFavorite){
-            dispatch(removeFavorite(product._id))
+        if (isFavorite) {
+            dispatch(removeFavorite(product._id));
             toast.success(`"${product.title}" removed from favorites!`, {
                 icon: <Heart size={18} className="text-red-600" />,
             });
-        }else{
+        } else {
             dispatch(addFavorite(product));
             toast.success(`"${product.title}" added to favorites!`, {
                 icon: <Heart size={18} className="text-red-600" />,
             });
         }
-    }
+    };
 
     return (
         <div className="p-4 relative">
@@ -80,7 +53,8 @@ const ProductCard = ({ product }: Props) => {
                     height={100}
                 />
             </div>
-            <p className="mt-5 text-xs capitalize text-gray-600">{product.brand}</p>
+            <p className="mt-5 text-md font-bold capitalize text-gray-600">{product.brand}</p>
+            <p className="text-xs text-gray-600">{product.color}</p>
             <Link href={`/product/product-details/${product._id}`}>
                 <h1 className="text-lg cursor-pointer hover:text-blue-900 transition-all hover:underline sm:w-full sm:truncate mt-2 text-black font-semibold">
                     {product.title}
@@ -88,21 +62,36 @@ const ProductCard = ({ product }: Props) => {
             </Link>
             <div className="flex mt-2 items-center space-x-2">
                 <p className="text-black text-base line-through font-semibold opacity-50">
-                    {`$${(product.price + 10).toFixed(2)}`}
+                    &#8377;{`${(product.price * 1.25).toFixed(2)}`}
                 </p>
-                <p className="text-black text-lg font-semibold opacity-80">${product.price}</p>
+                <p className="text-black text-lg font-semibold opacity-80">&#8377;{product.price}</p>
             </div>
             <div className="mt-4 flex items-center space-x-2">
-            {isLoaded && isSignedIn  ? (
-                    <button onClick={() => setShowModal(true)}>
-                        <ShoppingCartIcon size={18} />
-                    </button>
+                {isLoaded && isSignedIn ? (
+                    <ComponentModal
+                        availiableSizes={product.sizes ?? []}
+                        onAddToCart={(size) => {
+                            dispatch(
+                                addItem({
+                                    id: product._id,
+                                    title: product.title,
+                                    price: product.price,
+                                    category: product.category,
+                                    image: product.image,
+                                    size,
+                                })
+                            );
+                            toast.success(`"${product.title}" added to cart!`);
+                            setShowModal(false);
+                        }}
+                    />
                 ) : (
                     <button className="cursor-not-allowed opacity-50" disabled>
                         <ShoppingCartIcon size={18} />
                     </button>
                 )}
-                {isLoaded && isSignedIn  ? (
+
+                {isLoaded && isSignedIn ? (
                     <button onClick={handleFavoriteToggle}>
                         <Heart size={18} className={isFavorite ? "text-red-600" : "text-gray-600"} />
                     </button>
@@ -112,45 +101,6 @@ const ProductCard = ({ product }: Props) => {
                     </button>
                 )}
             </div>
-
-            {showModal && (
-                <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 flex items-center justify-center z-20">
-                    <div className="bg-white p-6 rounded-lg shadow-lg relative w-[280px]">
-                        <button
-                            className="absolute right-3 top-3 text-gray-500 hover:text-black"
-                            onClick={() => setShowModal(false)}
-                        >
-                            <X size={18} />
-                        </button>
-                        <h2 className="text-lg font-semibold mb-4">Select Size</h2>
-                        <div className="flex flex-wrap gap-2">
-                        {allSizes.map((size) => {
-                                const isAvailable = product.sizes?.includes(size);
-
-                                return (
-                                    <button
-                                        key={size}
-                                        disabled={!isAvailable}
-                                        className={`px-3 py-1 rounded border transition ${
-                                            !isAvailable
-                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                : selectedSize === size
-                                                ? "bg-black text-white"
-                                                : "bg-white text-black hover:bg-gray-100"
-                                        }`}
-                                        onClick={() => isAvailable && setSelectedSize(size)}
-                                    >
-                                        {size}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        <button onClick={handleAddtoCart} className="mt-4 bg-black text-white w-full py-2 rounded">
-                            Confirm Add to Cart
-                        </button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

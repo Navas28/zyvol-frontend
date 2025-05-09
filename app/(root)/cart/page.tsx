@@ -2,7 +2,6 @@
 
 import { CartItem } from "@/store/cartSlice";
 import { RootState } from "@/store/store";
-
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,9 +13,9 @@ const Cart = () => {
     const dispatch = useDispatch();
     const items = useSelector((state: RootState) => state.cart.items);
     const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
-    const discount = totalPrice * 0.05;
-    const finalPrice = (totalPrice - discount).toFixed(2);
+    const totalPrice = Math.round (items.reduce((total, item) => total + item.price * item.quantity, 0));
+    const discount = Math.round(totalPrice * 0.05 );
+    const finalPrice = Math.round(totalPrice - discount).toFixed(2);
 
     const addItemCart = (item: CartItem) => {
         dispatch(addItem(item));
@@ -25,6 +24,27 @@ const Cart = () => {
     const removeItemCart = (id: string, size: number) => {
         dispatch(removeItem({ id, size }));
     };
+
+    const handleCheckout = async () => {
+        const response = await fetch('http://localhost:4000/api/checkout/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: finalPrice, 
+          }),
+        });
+      
+        const data = await response.json();
+        
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          console.error('Error:', data.error);
+        }
+      };
+      
 
     return (
         <div className="mt-8 min-h-[60vh]">
@@ -60,7 +80,7 @@ const Cart = () => {
                                         <div>
                                             <h1>{item.title}</h1>
                                             <h1>category: {item.category}</h1>
-                                            <h1>$ {item.price}</h1>
+                                            <h1>&#8377;{item.price}</h1>
                                             <h1>quantity: {item.quantity}</h1>
                                             {item.size && <h1>Size: {item.size}</h1>}
                                         </div>
@@ -91,11 +111,13 @@ const Cart = () => {
                             <div className="w-full h-[1.2px] bg-black bg-opacity-20"></div>
                             <div className="flex mt-4 text-xl uppercase font-semibold items-center justify-between">
                                 <span>Subtotal</span>
-                                <span>$ {totalPrice}</span>
+                                <span>&#8377;
+                                {totalPrice}</span>
                             </div>
                             <div className="flex mt-10 text-xl uppercase font-semibold items-center justify-between">
-                                <span>Discount</span>
-                                <span>$ {discount} %</span>
+                                <span>Special Discount (5%)</span>
+                                <span>&#8377;
+                                {discount}</span>
                             </div>
                             <div className="flex mb-6 text-xl uppercase font-semibold items-center justify-between">
                                 <span>Shipping</span>
@@ -104,10 +126,11 @@ const Cart = () => {
                             <div className="w-full h-[1.2px] bg-black bg-opacity-20"></div>
                             <div className="flex mb-6 mt-6 text-xl uppercase font-semibold items-center justify-between">
                                 <span>Total</span>
-                                <span>${finalPrice}</span>
+                                <span>&#8377;
+                                  {finalPrice}</span>
                             </div>
 
-                            <button className="bg-amber-300">Pay now</button>
+                            <button onClick={handleCheckout} className="bg-amber-300">Pay now</button>
                         </div>
                     </div>
                 </div>
