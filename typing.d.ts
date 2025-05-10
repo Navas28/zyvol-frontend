@@ -1,4 +1,5 @@
 export interface Product {
+    faq: any;
     name: string | undefined;
     _id: string;
     title: string;

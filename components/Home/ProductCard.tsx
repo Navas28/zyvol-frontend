@@ -43,30 +43,35 @@ const ProductCard = ({ product }: Props) => {
     };
 
     return (
-        <div className="p-4 relative">
-            <div className="w-[200px] h-[150px]">
+        <article className="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-700">
+            <div>
                 <Image
                     src={product.image}
                     alt={product.title}
-                    className="w-[80%] h-[80%] object-contain"
-                    width={100}
-                    height={100}
+                    className="object-cover h-64 w-full"
+                    width={400}
+                    height={400}
                 />
             </div>
-            <p className="mt-5 text-md font-bold capitalize text-gray-600">{product.brand}</p>
-            <p className="text-xs text-gray-600">{product.color}</p>
-            <Link href={`/product/product-details/${product._id}`}>
-                <h1 className="text-lg cursor-pointer hover:text-blue-900 transition-all hover:underline sm:w-full sm:truncate mt-2 text-black font-semibold">
-                    {product.title}
-                </h1>
-            </Link>
-            <div className="flex mt-2 items-center space-x-2">
-                <p className="text-black text-base line-through font-semibold opacity-50">
-                    &#8377;{`${(product.price * 1.25).toFixed(2)}`}
-                </p>
-                <p className="text-black text-lg font-semibold opacity-80">&#8377;{product.price}</p>
+
+            <div className="flex flex-col gap-1 mt-4 px-4">
+                <Link href={`/product/product-details/${product._id}`}>
+                    <h1 className="text-lg cursor-pointer hover:text-blue-900 transition-all hover:underline sm:w-full sm:truncate mt-2 text-black font-semibold">
+                        {product.title}
+                    </h1>
+                </Link>
+
+                <span className="font-normal text-gray-600 dark:text-gray-300">{product.brand}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">{product.color}</span>
+                <div className="flex items-center gap-2 mt-1">
+                    <span className="text-gray-500 line-through dark:text-gray-400">
+                        ₹{(product.price * 1.25).toFixed(2)}
+                    </span>
+                    <span className="font-semibold text-gray-800 dark:text-gray-50">₹{product.price}</span>
+                </div>
             </div>
-            <div className="mt-4 flex items-center space-x-2">
+
+            <div className="mt-4 p-4 border-t border-gray-200 dark:border-gray-500 flex justify-between items-center">
                 {isLoaded && isSignedIn ? (
                     <ComponentModal
                         availiableSizes={product.sizes ?? []}
@@ -82,26 +87,25 @@ const ProductCard = ({ product }: Props) => {
                                 })
                             );
                             toast.success(`"${product.title}" added to cart!`);
-                            setShowModal(false);
                         }}
                     />
                 ) : (
                     <button className="cursor-not-allowed opacity-50" disabled>
-                        <ShoppingCartIcon size={18} />
+                        <ShoppingCartIcon className="h-6 w-6 text-gray-600 dark:text-gray-300" />
                     </button>
                 )}
 
                 {isLoaded && isSignedIn ? (
                     <button onClick={handleFavoriteToggle}>
-                        <Heart size={18} className={isFavorite ? "text-red-600" : "text-gray-600"} />
+                        <Heart className={`h-6 w-6 ${isFavorite ? "text-red-600" : "text-gray-600 dark:text-gray-300"}`} />
                     </button>
                 ) : (
                     <button className="cursor-not-allowed opacity-50" disabled>
-                        <Heart size={18} className="text-gray-600" />
+                        <Heart className="h-6 w-6 text-gray-600 dark:text-gray-300" />
                     </button>
                 )}
             </div>
-        </div>
+        </article>
     );
 };
 
