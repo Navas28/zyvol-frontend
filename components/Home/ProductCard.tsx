@@ -83,6 +83,7 @@ const ProductCard = ({ product }: Props) => {
                                     price: product.price,
                                     category: product.category,
                                     image: product.image,
+                                    brand: product.brand,
                                     size,
                                 })
                             );

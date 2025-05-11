@@ -31,18 +31,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <StoreProvider>
-            <ClerkProvider>
-                <html lang="en">
-                    <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
-                        <AuthSync/>
+        <html lang="en">
+            <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
+                <ClerkProvider>
+                    <StoreProvider>
+                        <AuthSync />
                         <Navbar />
                         {children}
-                        <Toaster/>
+                        <Toaster />
                         <Footer />
-                    </body>
-                </html>
-            </ClerkProvider>
-        </StoreProvider>
+                    </StoreProvider>
+                </ClerkProvider>
+            </body>
+        </html>
     );
 }

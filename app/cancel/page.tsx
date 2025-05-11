@@ -8,7 +8,7 @@ export default function CancelPage() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      router.push("/");
+      router.push("/cart");
     }, 3000);
 
     return () => clearTimeout(timeout); 
@@ -17,7 +17,7 @@ export default function CancelPage() {
   return (
     <div className="min-h-screen flex items-center justify-center flex-col">
       <h1 className="text-3xl font-bold text-red-600">Payment Cancelled</h1>
-      <p className="mt-4 text-gray-600">Redirecting to home page...</p>
+      <p className="mt-4 text-gray-600">Redirecting to cart...</p>
     </div>
   );
 }

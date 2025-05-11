@@ -32,7 +32,7 @@ const ProductDetailsClient = ({ product }: { product: Product; relatedProduct: P
         const fetchRelated = async () => {
             const res = await getProductByCategory(product.category);
             // Exclude the current product
-            const filtered = res.filter((p: Product) => p._id !== product._id);
+            const filtered = res.filter((pro: Product) => pro._id !== product._id);
             setRelatedProducts(filtered);
         };
 
@@ -56,7 +56,8 @@ const ProductDetailsClient = ({ product }: { product: Product; relatedProduct: P
                     price: product.price,
                     category: product.category,
                     image: product.image,
-                    size: selectedSize,
+                    brand: product.brand,
+                    size: product.sizes,
                 })
             );
             toast.success(`"${product.title}" (Size: ${selectedSize}) Added to Cart`, {
