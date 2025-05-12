@@ -1,10 +1,11 @@
-import { FavoriteItem, removeFavorite } from '@/store/favoritesSlice';
+import { removeFavorite } from '@/store/favoritesSlice';
 import Link from 'next/link';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { SheetClose } from '../ui/sheet';
 import Image from 'next/image';
 import { Product } from '@/typing';
+import { Heart, ShoppingCart, Trash2 } from 'lucide-react';
 
 type Props = {
     items: Product[];
@@ -18,61 +19,93 @@ const FavoriteSidebar = ({items} : Props) => {
   }
 
   return (
-    <div className="mt-6 h-full mb-6">
-    {items.length === 0 && (
-      <div className="flex items-center w-full h-[80vh] flex-col justify-center">
-        <Image
-          src="/image/logo.png"
-          alt="empty favorite"
-          width={200}
-          height={200}
-          className="object-cover mx-auto"
-        />
-        <h1 className="mt-8 text-2xl font-semibold">No Favorites Yet</h1>
-      </div>
-    )}
-
-    {items.length > 0 && (
-      <div>
-        {items.map((item) => (
-          <div
-            key={item._id}
-            className="pb-4 border-b-2 border-gray-300 border-opacity-60 p-4"
-          >
-            <div>
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={60}
-                height={60}
-                className="object-cover mb-4"
-              />
-            </div>
-            <div>
-              <h1 className="text-sm w-4/5 font-semibold truncate">
-                {item.title}
-              </h1>
-              <h1 className="text-base text-blue-950 font-bold">
-                ${item.price.toFixed(2)}
-              </h1>
-              <button
-                onClick={() => removeFromFavorite(item._id)}
-                className="mt-2 bg-black text-white px-3 py-2"
-              >
-                Remove
-              </button>
-            </div>
+    <div className="flex flex-col h-full">
+      {items.length === 0 ? (
+        <div className="flex items-center flex-col justify-center flex-grow py-10">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-6 mb-4">
+            <Heart size={64} className="text-gray-400" />
           </div>
-        ))}
-        <Link href="/cart">
-          <SheetClose className="w-full mb-6 mt-6 bg-black text-white text-center px-4 py-2">
-             Checkout Cart
-          </SheetClose>
-        </Link>
-      </div>
-    )}
-  </div>
+          <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-2">No Favorites Yet</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-center max-w-xs">
+            Items you save to your favorites will appear here.
+          </p>
+        </div>
+      ) : (
+        <div className="flex flex-col h-full">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+              Your Favorites ({items.length})
+            </h2>
+          </div>
+          
+          <div className="flex-grow overflow-auto py-2 px-4">
+            {items.map((item) => (
+              <div 
+                key={item._id}
+                className="flex gap-3 py-4 border-b border-gray-200 dark:border-gray-700 last:border-0"
+              >
+                <div className="w-20 h-20 rounded-md overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={80}
+                    height={80}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                
+                <div className="flex-grow">
+                  <Link href={`/product/product-details/${item._id}`}>
+                    <h3 className="font-medium text-gray-800 dark:text-gray-200 text-sm line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {item.title}
+                    </h3>
+                  </Link>
+                  
+                  <div className="flex flex-col  mt-1 gap-2">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {item.brand}
+                    </span>
+                    {item.color && (
+                      <>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {item.color}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center justify-between mt-3">
+                    <p className="font-medium text-gray-800 dark:text-gray-200">
+                      &#8377;{item.price.toFixed(2)}
+                    </p>
+                    
+                    <div className="flex items-center gap-2">
+                      <button 
+                        onClick={() => removeFromFavorite(item._id)}
+                        className="flex items-center justify-center p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors"
+                        aria-label="Remove from favorites"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="border-t border-gray-200 dark:border-gray-700 mt-auto px-4 py-4 space-y-4">
+            <Link href="/cart" className="block w-full">
+              <SheetClose className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white font-medium rounded-md py-3 text-center transition-colors">
+                <ShoppingCart size={18} />
+                Go to Cart
+              </SheetClose>
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
-export default FavoriteSidebar
+export default FavoriteSidebar;

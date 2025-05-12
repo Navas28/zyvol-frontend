@@ -43,7 +43,7 @@ const ProductCard = ({ product }: Props) => {
     };
 
     return (
-        <article className="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-700">
+        <article className="max-w-sm w-full rounded-lg shadow-lg overflow-hidden  hover:scale-105 duration-500 ease-in-out">
             <div>
                 <Image
                     src={product.image}

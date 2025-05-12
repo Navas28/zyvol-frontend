@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface CartItem {
-    brand: ReactNode;
+    brand: string;
     id: string;
     title: string;
     price: number;
