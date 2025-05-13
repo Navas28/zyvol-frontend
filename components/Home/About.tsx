@@ -17,7 +17,11 @@ const About = () => {
                                 </span>
                             </h2>
                             <p className="text-base text-gray-700">
-                                Zyvol has revolutionized the sneaker industry with our commitment to bold design, superior comfort, and unmatched quality. We believe that sneakers are more than just footwear—they're a statement of identity, a canvas for self-expression, and the foundation of your personal style. Every pair of Zyvol sneakers combines cutting-edge design with traditional craftsmanship to create footwear that's as unique as you are.
+                                Zyvol has revolutionized the sneaker industry with our commitment to bold design, superior
+                                comfort, and unmatched quality. We believe that sneakers are more than just footwear—they're
+                                a statement of identity, a canvas for self-expression, and the foundation of your personal
+                                style. Every pair of Zyvol sneakers combines cutting-edge design with traditional
+                                craftsmanship to create footwear that's as unique as you are.
                             </p>
                             <div className="mt-10 flex flex-col items-center md:flex-row">
                                 <a
@@ -26,12 +30,8 @@ const About = () => {
                                 >
                                     Contact
                                 </a>
-                                <a
-                                    href="/"
-                                    aria-label=""
-                                    className="group inline-flex items-center gap-2 font-semibold"
-                                >
-                                   Browse Collections
+                                <a href="/" aria-label="" className="group inline-flex items-center gap-2 font-semibold">
+                                    Browse Collections
                                     <ArrowRight size={18} />
                                 </a>
                             </div>
@@ -39,7 +39,7 @@ const About = () => {
                     </div>
                     <div className="relative lg:block">
                         <div className="abg-orange-400 mx-auto w-fit overflow-hidden rounded-[6rem] rounded-br-none rounded-tl-none">
-                            <Image src="/image/about.jpg" width={500} height={500}  alt=" sneaker"/>
+                            <Image src="/image/about.jpg" width={500} height={500} alt=" sneaker" />
                         </div>
                     </div>
                 </div>

@@ -6,9 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ArrowLeft, ArrowRight, Instagram, Facebook, Twitter } from "lucide-react";
 
-// Swiper styles would be imported in your main layout or page component
-// These imports are commented out as they would typically be in _app.js
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -16,7 +13,6 @@ import "swiper/css/autoplay";
 import Image from "next/image";
 
 export default function HeroSection() {
-    // Sample sneaker data
     const sneakers = [
         {
             id: 1,
@@ -75,7 +71,7 @@ export default function HeroSection() {
     return (
         <div className="relative bg-gray-100 overflow-hidden" id="home">
             <Swiper
-                modules={[Navigation, Pagination]} // Autoplay
+                modules={[Navigation, Pagination, Autoplay]} 
                 spaceBetween={0}
                 slidesPerView={1}
                 onSwiper={setSwiperInstance}
