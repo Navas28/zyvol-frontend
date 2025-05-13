@@ -4,7 +4,7 @@ import { addItem } from "@/store/cartSlice";
 import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
 import { Product } from "@/typing";
 import { useUser } from "@clerk/nextjs";
-import { Heart, ShoppingCartIcon, X } from "lucide-react";
+import { Heart, HeartCrack, ShoppingCartIcon, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -31,8 +31,8 @@ const ProductCard = ({ product }: Props) => {
         }
         if (isFavorite) {
             dispatch(removeFavorite(product._id));
-            toast.success(`"${product.title}" removed from favorites!`, {
-                icon: <Heart size={18} className="text-red-600" />,
+            toast.error(`"${product.title}" removed from favorites!`, {
+                icon: <HeartCrack size={18} className="text-red-600" />,
             });
         } else {
             dispatch(addFavorite(product));

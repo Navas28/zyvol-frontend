@@ -73,7 +73,7 @@ export default function HeroSection() {
     };
 
     return (
-        <div className="relative bg-gray-100 overflow-hidden">
+        <div className="relative bg-gray-100 overflow-hidden" id="home">
             <Swiper
                 modules={[Navigation, Pagination]} // Autoplay
                 spaceBetween={0}

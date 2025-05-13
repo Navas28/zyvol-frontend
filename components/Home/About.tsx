@@ -4,11 +4,11 @@ import React from "react";
 
 const About = () => {
     return (
-        <div className="relative flex items-center justify-center min-h-screen overflow-hidden z-50 ">
+        <div id="about" className="relative flex items-center justify-center min-h-screen overflow-hidden">
             <div className="relative mx-auto w-full h-full px-4  pb-20  md:pb-10 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-7xl lg:px-8">
                 <div className="flex flex-col items-center justify-between lg:flex-row py-16 gap-20">
                     <div className="relative">
-                        <div className="lg:max-w-xl lg:pr-5 relative z-40">
+                        <div className="lg:max-w-xl lg:pr-5 relative">
                             <p className="flex text-sm uppercase">About Us</p>
                             <h2 className="mb-6 max-w-lg text-5xl font-light leading-snug tracking-tight  sm:text-7xl sm:leading-snug">
                                 We make you look
@@ -37,7 +37,7 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="relative lg:block ">
+                    <div className="relative lg:block">
                         <div className="abg-orange-400 mx-auto w-fit overflow-hidden rounded-[6rem] rounded-br-none rounded-tl-none">
                             <Image src="/image/about.jpg" width={500} height={500}  alt=" sneaker"/>
                         </div>

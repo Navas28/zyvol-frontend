@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard";
 import { Loader, SlidersHorizontal, ShoppingBag } from "lucide-react";
 
 const categories = ["Men", "Women"];
-const brands = ["All", "Nike", "Adidas", "Puma", "Reebok"];
+const brands = ["All", "Nike", "Adidas", "New Balance", "Jordan"];
 
 const AllProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,7 +34,7 @@ const AllProduct = () => {
   }, [selectedCategory, selectedBrand]);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div id="sneakers" className="bg-white min-h-screen">
       <div className="sticky top-0 z-10">
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="flex justify-between items-center h-16">
