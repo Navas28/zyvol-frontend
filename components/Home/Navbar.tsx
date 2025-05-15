@@ -1,13 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SearchBox from "../Helper/SearchBox";
-import { UserIcon } from "lucide-react";
+import { ShieldUser, UserIcon } from "lucide-react";
 import ShopingCartButton from "../Helper/ShopingCartButton";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import FavoriteButton from "../Helper/FavoriteButton";
 
 const Navbar = () => {
+    const { user, isLoaded } = useUser();
+
+    if (!isLoaded) return null;
+    const isAdmin = user?.publicMetadata?.role === "admin";
+
     return (
         <div className="h-[12vh] sticky top-0 z-10 bg-white shadow-md">
             <div className="flex items-center justify-evenly w-[95%] md:w-4/5 mx-auto h-full">
@@ -20,6 +27,11 @@ const Navbar = () => {
                     <ShopingCartButton />
 
                     <SignedIn>
+                        {isAdmin && (
+                            <Link href="/admin/products" className="hover:underline underline-offset-2">
+                               <ShieldUser size={30}/>
+                            </Link>
+                        )}
                         <UserButton />
                     </SignedIn>
 

@@ -1,5 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Check, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
+import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -100,110 +103,161 @@ export default function EditProductPage() {
     };
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Edit product {productId}</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input
-                        type="text"
-                        value={product.title}
-                        onChange={(e) => handleInputChange(e, "title")}
-                        className="border p-2"
-                    />
+        <div className="p-8  min-h-screen">
+            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer ml-10">
+                <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
+                Go back
+            </Button>
+            <div className="max-w-4xl mx-auto">
+                <div className="mb-6 flex items-center justify-between">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-800">Edit Product</h1>
+                        <p className="text-gray-600 mt-1">Update or delete product information</p>
+                    </div>
                 </div>
 
-                <div>
-                    <label>Price:</label>
-                    <input
-                        type="number"
-                        value={product.price}
-                        onChange={(e) => handleInputChange(e, "price")}
-                        className="border p-2"
-                    />
+                <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+                    <div className="p-6 flex flex-col md:flex-row items-center">
+                        <div className="w-40 h-40 flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                            <Image
+                                src={product.image}
+                                alt="produc image"
+                                height={100}
+                                width={100}
+                                className="w-full h-full object-cover rounded-md border border-gray-200"
+                            />
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-semibold">{product.title}</h2>
+                            <div className="mt-2 flex flex-wrap gap-2">
+                                <span className="px-3 py-1 inline-flex text-xs leading-5 font-medium rounded-md bg-[#f2f2f2]">
+                                    {product.category}
+                                </span>
+                                <span className="px-3 py-1 inline-flex text-xs leading-5 font-medium rounded-md bg-[#f2f2f2]">
+                                    ₹{product.price}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <label>Description:</label>
-                    <textarea
-                        value={product.description}
-                        onChange={(e) => handleInputChange(e, "description")}
-                        className="border p-2"
-                    />
+                <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <form onSubmit={handleSubmit} className="p-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                                <input
+                                    type="text"
+                                    value={product.title}
+                                    onChange={(e) => handleInputChange(e, "title")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Price (₹)</label>
+                                <input
+                                    type="number"
+                                    value={product.price}
+                                    onChange={(e) => handleInputChange(e, "price")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
+                                <input
+                                    type="text"
+                                    value={product.image}
+                                    onChange={(e) => handleInputChange(e, "image")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                                <input
+                                    type="text"
+                                    value={product.category}
+                                    onChange={(e) => handleInputChange(e, "category")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Brand</label>
+                                <input
+                                    type="text"
+                                    value={product.brand}
+                                    onChange={(e) => handleInputChange(e, "brand")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                                <input
+                                    type="text"
+                                    value={product.color}
+                                    onChange={(e) => handleInputChange(e, "color")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Sizes</label>
+                                <input
+                                    type="text"
+                                    value={sizeInput}
+                                    onChange={(e) => handleInputChange(e, "sizes")}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    placeholder="e.g., 38,40,42,44"
+                                />
+                            </div>
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea
+                                    value={product.description}
+                                    onChange={(e) => handleInputChange(e, "description")}
+                                    rows={5}
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                />
+                            </div>
+                        </div>
+                        <div className="mt-8 flex flex-col sm:flex-row sm:justify-between">
+                            <button
+                                type="submit"
+                                className="flex items-center gap-2 justify-center bg-green text-white px-6 py-3 rounded-md font-medium transition duration-200 mb-4 sm:mb-0 cursor-pointer"
+                            >
+                                <Check size={20} />
+                                Save Changes
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirm(true)}
+                                className="flex items-center  bg-red-600 text-white gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 cursor-pointer"
+                            >
+                                <Trash2 size={20} />
+                                Delete Product
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div>
-                    <label>Image URL:</label>
-                    <input
-                        type="text"
-                        value={product.image}
-                        onChange={(e) => handleInputChange(e, "image")}
-                        className="border p-2"
-                    />
-                </div>
-
-                <div>
-                    <label>Category:</label>
-                    <input
-                        type="text"
-                        value={product.category}
-                        onChange={(e) => handleInputChange(e, "category")}
-                        className="border p-2"
-                    />
-                </div>
-
-                <div>
-                    <label>Brand:</label>
-                    <input
-                        type="text"
-                        value={product.brand}
-                        onChange={(e) => handleInputChange(e, "brand")}
-                        className="border p-2"
-                    />
-                </div>
-
-                <div>
-                    <label>Color:</label>
-                    <input
-                        type="text"
-                        value={product.color}
-                        onChange={(e) => handleInputChange(e, "color")}
-                        className="border p-2"
-                    />
-                </div>
-                <div>
-                    <label>Sizes:</label>
-                    <input
-                        type="text"
-                        value={sizeInput}
-                        onChange={(e) => handleInputChange(e, "sizes")}
-                        className="border p-2"
-                    />
-                </div>
-
-                <button type="submit" className="bg-black text-white px-4 py-2 mt-4">
-                    Save Changes
-                </button>
-
-                <button
-                    type="button"
-                    onClick={() => setShowConfirm(true)}
-                    className="bg-red-600 text-white px-4 py-2 mt-2 ml-4"
-                >
-                    Delete Product
-                </button>
-            </form>
-
+            </div>
             {showConfirm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-                        <h2 className="text-lg font-bold mb-4">Are you sure?</h2>
-                        <p className="mb-4">This will permanently delete the product.</p>
-                        <div className="flex justify-end">
-                            <button onClick={() => setShowConfirm(false)} className="px-4 py-2 mr-2 border">
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                        <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-red-100">
+                            <TriangleAlert className="text-red-600" />
+                        </div>
+                        <h2 className="text-xl font-bold text-center text-gray-800 mb-4">Delete Product</h2>
+                        <p className="text-gray-600 text-center mb-6">Are you sure you want to delete "{product.title}"?</p>
+                        <div className="flex justify-center space-x-4">
+                            <button
+                                onClick={() => setShowConfirm(false)}
+                                className="px-5 py-2 bg-gray-200 text-gray-800 rounded-md font-medium transition duration-200"
+                            >
                                 Cancel
                             </button>
-                            <button onClick={handleDelete} className="bg-red-600 text-white px-4 py-2">
+                            <button
+                                onClick={handleDelete}
+                                className="px-5 py-2 bg-red-600  text-white rounded-md font-medium transition duration-200"
+                            >
                                 Delete
                             </button>
                         </div>
