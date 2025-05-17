@@ -100,7 +100,7 @@ const ProductDetailsClient = ({ product }: { product: Product; relatedProduct: P
                                     key={index}
                                     className={`cursor-pointer border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden transition-all duration-200 ${
                                         imgUrl === mainImage
-                                            ? "ring-2 ring-blue-600 ring-offset-2"
+                                            ? "ring-2 ring-yellow ring-offset-2"
                                             : "opacity-70 hover:opacity-100 hover:shadow-md"
                                     }`}
                                     onClick={() => setMainImage(imgUrl)}

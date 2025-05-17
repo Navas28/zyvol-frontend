@@ -1,6 +1,5 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { PlusIcon } from "lucide-react";
-
 import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
 import { Product } from "@/typing";
 
@@ -15,12 +14,12 @@ export default function AccordianComponent({ product }: { product: Product }) {
             id: "2",
             title: "Product Details",
             content: (
-                <p className="text-base text-black">
+                <div className="text-base text-black">
                     <p>Manufacturer: {product?.productDetails?.manufacturer}</p>
                     <p>Country of Origin: {product?.productDetails?.countryOfOrigin}</p>
                     <p>Imported By: {product?.productDetails?.importedBy}</p>
                     <p>Weight: {product?.productDetails?.weight}</p>
-                </p>
+                </div>
             ),
         },
     ];

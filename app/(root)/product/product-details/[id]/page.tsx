@@ -2,13 +2,7 @@ import { getProductByCategory, getSingleProduct } from "@/Request/requests";
 import ProductDetailsClient from "../../ProductDetailsClient";
 import { Product } from "@/typing";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
-
-const ProductDetails = async ({ params }: Params) => {
+const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   let singleProduct: Product | null = null;
   let relatedProduct: Product[] = [];

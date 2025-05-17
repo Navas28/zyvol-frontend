@@ -20,11 +20,9 @@ const AuthSync = () => {
 
     useEffect(() => {
       const fetchProducts = async () => {
-          console.log("Fetching products...");
           try {
               const res = await fetch('http://localhost:4000/api/products');
-              const data = await res.json();
-              console.log("Products fetched:", data);  
+              const data = await res.json(); 
               dispatch(setProducts(data));
           } catch (error) {
               console.error("Failed to load products:", error);
