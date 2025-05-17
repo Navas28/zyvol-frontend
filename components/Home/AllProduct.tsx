@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getFilteredProducts } from "../../Request/requests";
 import { Product } from "../../typing";
 import ProductCard from "./ProductCard";
@@ -16,7 +16,7 @@ const AllProduct = () => {
     const [selectedBrand, setSelectedBrand] = useState("All");
     const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback ( async () => {
         setLoading(true);
         try {
             const data = await getFilteredProducts(selectedCategory, selectedBrand);
@@ -27,11 +27,11 @@ const AllProduct = () => {
         } finally {
             setLoading(false);
         }
-    };
+    },[selectedCategory, selectedBrand]);
 
     useEffect(() => {
         fetchProducts();
-    }, [selectedCategory, selectedBrand]);
+    }, [fetchProducts]);
 
     return (
         <div id="sneakers" className="bg-white min-h-screen">
