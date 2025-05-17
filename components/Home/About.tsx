@@ -12,7 +12,7 @@ const About = () => {
                             <p className="flex text-sm uppercase">About Us</p>
                             <h2 className="mb-6 max-w-lg text-5xl font-light leading-snug tracking-tight  sm:text-7xl sm:leading-snug">
                                 We make you look
-                                <span className="my-1 inline-block border-b-8 border-green bg-white px-4 font-bold animate__animated animate__flash">
+                                <span className="inline-block border-b-8 border-green bg-white font-bold animate__animated animate__flash">
                                     extraordinary
                                 </span>
                             </h2>
@@ -25,14 +25,10 @@ const About = () => {
                             </p>
                             <div className="mt-10 flex flex-col items-center md:flex-row">
                                 <a
-                                    href="/"
+                                    href="#contact"
                                     className="mb-3 inline-flex h-12 w-full items-center justify-center rounded bg-green px-6 font-medium tracking-wide text-white shadow-md transition  focus:outline-none md:mr-4 md:mb-0 md:w-auto"
                                 >
                                     Contact
-                                </a>
-                                <a href="/" aria-label="" className="group inline-flex items-center gap-2 font-semibold">
-                                    Browse Collections
-                                    <ArrowRight size={18} />
                                 </a>
                             </div>
                         </div>

@@ -26,7 +26,6 @@ export default async function AdminProductsPage() {
     return (
          <div className="p-4 md:p-8 min-h-screen">
             <div className="max-w-9xl mx-auto">
-                {/* Products Section */}
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
                     <div>
                         <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Products</h1>
@@ -76,10 +75,10 @@ export default async function AdminProductsPage() {
                                             {product.brand}
                                         </td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md font-medium">
-                                            <Link href={`/admin/products/${product._id}`} className="mr-4 transition duration-150 text-blue-600 hover:text-blue-800">
+                                            <Link href={`/admin/products/${product._id}`} className="mr-4 transition duration-150">
                                                 Edit
                                             </Link>
-                                            <Link href={`/admin/products/${product._id}?mode=delete`} className="text-red-600 hover:text-red-900 transition duration-150">
+                                            <Link href={`/admin/products/${product._id}?mode=delete`} className="text-red-600 transition duration-150">
                                                 Delete
                                             </Link>
                                         </td>
@@ -87,30 +86,13 @@ export default async function AdminProductsPage() {
                                 ))}
                             </tbody>
                         </table>
-                
-                        {products.length === 0 && (
-                            <div className="text-center py-10">
-                                <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                                </svg>
-                                <h3 className="mt-2 text-sm font-medium text-gray-900">No products</h3>
-                                <p className="mt-1 text-sm text-gray-500">Get started by creating a new product.</p>
-                            </div>
-                        )}
                     </div>
                 </div>
-                
-                {/* Orders Section */}
+            
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
                     <div>
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Recent Orders</h1>
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Orders</h1>
                         <p className="text-gray-600 mt-1">Total orders: {orders.length}</p>
-                    </div>
-                    <div className="mt-4 md:mt-0">
-                        <button className="bg-blue-600 text-white px-4 py-2 md:px-5 md:py-3 rounded-md font-medium transition duration-200 flex items-center cursor-pointer hover:bg-blue-700">
-                            <ShoppingBag className="mr-2 h-5 w-5" />
-                            View All Orders
-                        </button>
                     </div>
                 </div>
                 
@@ -136,9 +118,9 @@ export default async function AdminProductsPage() {
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.country || "—"}</td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                                             <span className={`px-3 py-1 inline-flex text-md leading-5 font-semibold rounded-full ${
-                                                order.status === "paid" ? "bg-green-100 text-green-800" : 
-                                                order.status === "pending" ? "bg-yellow-100 text-yellow-800" : 
-                                                "bg-gray-100 text-gray-800"
+                                                order.status === "paid" ? "text-green-600" : 
+                                                order.status === "pending" ? " text-yellow-600" : 
+                                                "text-gray-800"
                                             }`}>
                                                 {order.status}
                                             </span>
@@ -150,16 +132,6 @@ export default async function AdminProductsPage() {
                                 ))}
                             </tbody>
                         </table>
-                        
-                        {orders.length === 0 && (
-                            <div className="text-center py-10">
-                                <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                <h3 className="mt-2 text-sm font-medium text-gray-900">No orders</h3>
-                                <p className="mt-1 text-sm text-gray-500">No orders have been placed yet.</p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>

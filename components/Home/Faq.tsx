@@ -79,7 +79,7 @@ const Faq = () => {
             <div className="mt-8 text-center">
                 <p className="text-gray-600 text-sm">
                     Still have questions? Contact our customer support team at{" "}
-                    <span className="font-medium">support@sneakerstore.com</span>
+                    <span className="font-medium">support@zyvol.com</span>
                 </p>
             </div>
         </div>

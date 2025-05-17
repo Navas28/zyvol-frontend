@@ -10,7 +10,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import Image from "next/image";
 
 export default function HeroSection() {
     const sneakers = [
@@ -71,7 +70,7 @@ export default function HeroSection() {
     return (
         <div className="relative bg-gray-100 overflow-hidden" id="home">
             <Swiper
-                modules={[Navigation, Pagination, Autoplay]} 
+                modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={0}
                 slidesPerView={1}
                 onSwiper={setSwiperInstance}
@@ -92,12 +91,15 @@ export default function HeroSection() {
                                             </span>
                                         ))}
                                     </h1>
-                                    <p className="text-white text-xl md:text-2xl mb-8 max-w-lg">
+                                    <p className="text-white text-xl md:text-2xl mb-4 max-w-lg">
                                         &#8377; {sneaker.subtitle}
                                     </p>
-                                    <button className="bg-white/20 text-white font-semibold py-2 px-8 rounded-md text-lg transition-all duration-300 transform hover:scale-105 mb-10 md:mb-0 font-rob">
-                                        Buy Now <ArrowRight className="inline" />
-                                    </button>
+                                    <a
+                                        href="#sneakers"
+                                        className="bg-white/20 text-white font-semibold py-2 px-8 rounded-md text-lg transition-all duration-300 transform hover:scale-105 mb-10 md:mb-0 font-rob"
+                                    >
+                                        More <ArrowRight className="inline" />
+                                    </a>
                                 </div>
 
                                 <div className="absolute md:bottom-12 -bottom-20 left-8 md:left-16 lg:left-24 flex space-x-4">
