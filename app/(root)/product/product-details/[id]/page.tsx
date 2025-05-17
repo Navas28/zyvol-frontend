@@ -2,13 +2,13 @@ import { getProductByCategory, getSingleProduct } from "@/Request/requests";
 import ProductDetailsClient from "../../ProductDetailsClient";
 import { Product } from "@/typing";
 
-interface ProductPageProps {
+export interface PageProps {
     params: {
         id: string
     };
 }
 
-const ProductDetails = async ({ params }: ProductPageProps) => {
+const ProductDetails = async ({ params }: PageProps) => {
     const id = params.id;
     let singleProduct: Product | null = null;
     let relatedProduct: Product[] = [];
