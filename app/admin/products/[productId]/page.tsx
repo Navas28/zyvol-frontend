@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Check, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
+import { Check, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -80,10 +80,10 @@ export default function EditProductPage() {
             body: JSON.stringify(product),
         })
             .then((response) => response.json())
-            .then((data) => {
+            .then(() => {
                 alert("Product updated successfully");
             })
-            .catch((error) => {
+            .catch(() => {
                 alert("Error updating product.");
             });
     };
@@ -246,7 +246,7 @@ export default function EditProductPage() {
                             <TriangleAlert className="text-red-600" />
                         </div>
                         <h2 className="text-xl font-bold text-center text-gray-800 mb-4">Delete Product</h2>
-                        <p className="text-gray-600 text-center mb-6">Are you sure you want to delete "{product.title}"?</p>
+                        <p className="text-gray-600 text-center mb-6">Are you sure you want to delete {product.title}?</p>
                         <div className="flex justify-center space-x-4">
                             <button
                                 onClick={() => setShowConfirm(false)}

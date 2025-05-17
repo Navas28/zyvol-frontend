@@ -29,7 +29,7 @@ const CartSidebar = ({ items }: Props) => {
                     </div>
                     <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-2">Your Cart is Empty</h2>
                     <p className="text-gray-500 dark:text-gray-400 text-center max-w-xs">
-                        Looks like you haven't added any items to your cart yet.
+                        Looks like you havent added any items to your cart yet.
                     </p>
                 </div>
             ) : (

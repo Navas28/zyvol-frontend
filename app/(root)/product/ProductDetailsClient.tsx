@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/typing";
-import { ShoppingCart, StarIcon, TriangleAlert } from "lucide-react";
+import { ShoppingCart, TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ProductCard from "@/components/Home/ProductCard";

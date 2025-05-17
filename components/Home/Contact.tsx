@@ -24,7 +24,7 @@ const Contact = () => {
                 duration: 5000,
             });
             setFormData({ name: "", email: "", message: "" });
-        } catch (error) {
+        } catch {
             toast.error("Failed to send message", {
                 description: "Please try again later or contact us directly.",
                 duration: 5000,

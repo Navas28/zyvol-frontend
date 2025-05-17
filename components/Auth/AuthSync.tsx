@@ -4,7 +4,7 @@ import { clearCart } from '@/store/cartSlice'
 import { clearFavorites } from '@/store/favoritesSlice'
 import { setProducts } from '@/store/productSlice'
 import { useUser } from '@clerk/nextjs'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 const AuthSync = () => {

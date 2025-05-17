@@ -21,3 +21,16 @@ export interface Product {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface Order {
+    _id: string;
+    amount: number;
+    status: string;
+    paymentIntentId: string;
+    createdAt: string;
+    customerDetails: {
+        name: string;
+        email: string;
+        country: string;
+    };
+}

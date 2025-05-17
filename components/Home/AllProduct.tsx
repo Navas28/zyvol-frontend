@@ -35,10 +35,10 @@ const AllProduct = () => {
 
     return (
         <div id="sneakers" className="bg-white min-h-screen">
-            <div className="sticky top-0 z-10">
+            <div className="sticky top-0">
                 <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-16">
                     <div className="flex justify-between items-center h-16">
-                        <h2 className="text-xl font-bold tracking-tight text-gray-900">{selectedCategory}'s Collection</h2>
+                        <h2 className="text-xl font-bold tracking-tight text-gray-900">{selectedCategory}&apos;s Collection</h2>
 
                         <button
                             onClick={() => setFilterMenuOpen(!filterMenuOpen)}
@@ -130,7 +130,7 @@ const AllProduct = () => {
                                 </div>
                                 <h3 className="text-lg font-medium text-gray-900">No products available</h3>
                                 <p className="mt-2 text-center text-gray-500 max-w-sm">
-                                    We don't have any {selectedCategory.toLowerCase()} products from
+                                    We don&apos;t have any {selectedCategory.toLowerCase()} products from
                                     {selectedBrand !== "All" ? ` ${selectedBrand}` : " these brands"} at the moment.
                                 </p>
                                 <div className="mt-6">

@@ -4,24 +4,24 @@ import { addItem } from "@/store/cartSlice";
 import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
 import { Product } from "@/typing";
 import { useUser } from "@clerk/nextjs";
-import { Heart, HeartCrack, ShoppingCartIcon, X } from "lucide-react";
+import { Heart, HeartCrack, ShoppingCartIcon} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import ComponentModal from "../comp-323";
+import { RootState } from "@/store/store";
 
 type Props = {
     product: Product;
 };
 
 const ProductCard = ({ product }: Props) => {
-    const { isLoaded, isSignedIn, user } = useUser();
+    const { isLoaded, isSignedIn } = useUser();
     const dispatch = useDispatch();
-    const [showModal, setShowModal] = useState(false);
 
-    const favorites = useSelector((state: any) => state.favorites.items);
+    const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some((item: Product) => item._id === product._id);
 
     const handleFavoriteToggle = () => {

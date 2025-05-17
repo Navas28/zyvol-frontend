@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Check, ChevronLeftIcon, PackagePlus } from "lucide-react";
+import {  ChevronLeftIcon, PackagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

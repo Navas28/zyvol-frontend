@@ -53,7 +53,7 @@ const Faq = () => {
         <div className="px-4 mx-auto max-w-3xl">
             <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold mb-2">Frequently Asked Questions</h2>
-                <p className="text-gray-600">Got questions? We've got answers.</p>
+                <p className="text-gray-600">Got questions? We&apos;ve got answers.</p>
             </div>
 
             <Accordion type="single" collapsible className="w-full">

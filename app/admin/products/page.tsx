@@ -1,7 +1,7 @@
 
-import { Button } from "@/components/ui/button";
+import { Order, Product } from "@/typing";
 import { currentUser } from "@clerk/nextjs/server";
-import { ChevronLeftIcon, PackagePlus, ShoppingBag } from "lucide-react";
+import {  PackagePlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -53,7 +53,7 @@ export default async function AdminProductsPage() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {products.map((product: any) => (
+                                {products.map((product: Product) => (
                                     <tr key={product._id} className="hover:bg-gray-50 transition duration-150">
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
@@ -111,7 +111,7 @@ export default async function AdminProductsPage() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {orders.map((order: any) => (
+                                {orders.map((order: Order) => (
                                     <tr key={order._id} className="hover:bg-gray-50 transition duration-150">
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.name || "—"}</td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.email || "—"}</td>

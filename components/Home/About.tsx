@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -18,10 +17,10 @@ const About = () => {
                             </h2>
                             <p className="text-base text-gray-700">
                                 Zyvol has revolutionized the sneaker industry with our commitment to bold design, superior
-                                comfort, and unmatched quality. We believe that sneakers are more than just footwear—they're
-                                a statement of identity, a canvas for self-expression, and the foundation of your personal
-                                style. Every pair of Zyvol sneakers combines cutting-edge design with traditional
-                                craftsmanship to create footwear that's as unique as you are.
+                                comfort, and unmatched quality. We believe that sneakers are more than just footwear—they
+                                are a statement of identity, a canvas for self-expression, and the foundation of your
+                                personal style. Every pair of Zyvol sneakers combines cutting-edge design with traditional
+                                craftsmanship to create footwear that&apos;s as unique as you are.
                             </p>
                             <div className="mt-10 flex flex-col items-center md:flex-row">
                                 <a

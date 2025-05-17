@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import Image from "next/image";
 
 export default function HeroSection() {
     const sneakers = [
@@ -82,7 +83,7 @@ export default function HeroSection() {
                         <div className="flex flex-col md:flex-row min-h-screen">
                             <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 relative">
                                 <div className={`absolute top-0 left-0 w-full h-full  ${sneaker.color}`}></div>
-                                <div className="relative z-20">
+                                <div className="relative z-20 mb-10">
                                     <p className="font-semibold text-lg text-white mt-10 md:mt-0 font-rob">NEW IN</p>
                                     <h1 className=" text-white text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-wide font-pop">
                                         {sneaker.title.split("\n").map((line, index) => (
@@ -121,17 +122,19 @@ export default function HeroSection() {
                             <div className="w-full xl:w:1/2 2xl:w-1/3 relative flex items-center justify-center bg-gray-100">
                                 <div className="relative w-full h-full flex items-center justify-center top-100 md:top-0">
                                     <div className="absolute rounded-full w-full h-full 2xl:w-4/5 2xl:h-4/5 2xl:flex-none 2xl:justify-normal max-w-2xl max-h-2xl  flex flex-col justify-center">
-                                        <img src={sneaker.image3} alt="sneaker" />
+                                        <Image src={sneaker.image3} alt="sneaker" width={500} height={500} className="object-cover" />
                                     </div>
-                                    <img
+                                    <Image
                                         src={sneaker.image1}
                                         alt="Sneaker"
-                                        className="hidden 2xl:block relative z-10 w-full max-w-lg xl:max-w-xl transform rotate-12  transition-transform duration-500 drop-shadow-2xl"
+                                        className="hidden 2xl:block relative z-10 w-full max-w-lg xl:max-w-xl transform rotate-12  transition-transform duration-500 drop-shadow-2xl object-cover"
+                                        width={500} height={500}
                                     />
-                                    <img
+                                    <Image
                                         src={sneaker.image2}
                                         alt="Sneaker"
-                                        className="hidden 2xl:block relative z-10 w-full max-w-lg xl:max-w-xl transform -rotate-12 transition-transform duration-500 drop-shadow-2xl"
+                                        className="hidden 2xl:block relative z-10 w-full max-w-lg xl:max-w-xl transform -rotate-12 transition-transform duration-500 drop-shadow-2xl object-cover"
+                                        width={500} height={500}
                                     />
                                     <div className="absolute md:bottom-12 bottom-80 right-12 flex space-x-6 z-20">
                                         <a

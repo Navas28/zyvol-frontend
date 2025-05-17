@@ -9,14 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "@/store/cartSlice";
 import { ArrowRight, ChevronLeftIcon, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import router from "next/router";
 import { useRouter } from "next/navigation";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const items = useSelector((state: RootState) => state.cart.items);
-    // const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+
     const totalPrice = Math.round(items.reduce((total, item) => total + item.price * item.quantity, 0));
     const discount = Math.round(totalPrice * 0.05);
     const finalPrice = Math.round(totalPrice - discount).toFixed(2);
