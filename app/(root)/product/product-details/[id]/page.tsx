@@ -2,13 +2,8 @@ import { getProductByCategory, getSingleProduct } from "@/Request/requests";
 import ProductDetailsClient from "../../ProductDetailsClient";
 import { Product } from "@/typing";
 
-export interface PageProps {
-    params: {
-        id: string
-    };
-}
 
-const ProductDetails = async ({ params }: PageProps) => {
+const ProductDetails = async ({params,} : {params: {id: string}}) => {
     const id = params.id;
     let singleProduct: Product | null = null;
     let relatedProduct: Product[] = [];
