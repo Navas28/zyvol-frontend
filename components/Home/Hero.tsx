@@ -101,7 +101,7 @@ export default function HeroSection() {
                                     </a>
                                 </div>
 
-                                <div className="absolute md:bottom-12 -bottom-20 left-8 md:left-16 lg:left-24 flex space-x-4">
+                                <div className="hidden absolute md:bottom-12 -bottom-20 left-8 md:left-16 lg:left-24 md:flex space-x-4">
                                     <button
                                         onClick={goPrev}
                                         className=" px-7 h-9 bg-white rounded-md shadow-lg flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-300"
@@ -134,7 +134,7 @@ export default function HeroSection() {
                                         className="hidden 2xl:block relative z-10 w-full max-w-lg xl:max-w-xl transform -rotate-12 transition-transform duration-500 drop-shadow-2xl object-cover"
                                         width={500} height={500}
                                     />
-                                    <div className="absolute md:bottom-12 bottom-80 right-12 flex space-x-6 z-20">
+                                    <div className="absolute md:bottom-12 bottom-80 right-50% flex space-x-6 z-20">
                                         <a
                                             href="#"
                                             className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors duration-300"

@@ -40,7 +40,7 @@ export default function SearchBox() {
   return (
     <>
       <button
-        className="border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 shadow-md w-[40%] rounded-md border px-6 py-5 text-sm  transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
+        className="hidden md:inline-flex border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50  h-9 shadow-md w-[40%] rounded-md border px-6 py-5 text-sm  transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
         onClick={() => setOpen(true)}
       >
         <span className="flex grow items-center">

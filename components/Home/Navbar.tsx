@@ -21,7 +21,8 @@ const Navbar = () => {
                 <Link href={"/"}>
                     <Image src={"/image/logo.png"} alt="logo" width={140} height={140} />
                 </Link>
-                <SearchBox />
+                     <SearchBox/>
+               
                 <div className="flex items-center gap-4">
                     <FavoriteButton />
                     <ShopingCartButton />

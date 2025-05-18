@@ -33,7 +33,7 @@ const About = () => {
                         </div>
                     </div>
                     <div className="relative lg:block">
-                        <div className="abg-orange-400 mx-auto w-fit overflow-hidden rounded-[6rem] rounded-br-none rounded-tl-none">
+                        <div className="abg-orange-400 mx-auto w-fit overflow-hidden rounded-[3rem]">
                             <Image src="/image/about.jpg" width={500} height={500} alt=" sneaker" />
                         </div>
                     </div>
