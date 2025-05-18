@@ -2,7 +2,9 @@ import { getProductByCategory, getSingleProduct } from "@/Request/requests";
 import ProductDetailsClient from "../../ProductDetailsClient";
 import { Product } from "@/typing";
 
-export default async function Page({ params }: { params: { id: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProductDetails = async (props: any) => {
+  const { params } = props;
   const id = params.id;
   let singleProduct: Product | null = null;
   let relatedProduct: Product[] = [];
@@ -20,10 +22,14 @@ export default async function Page({ params }: { params: { id: string } }) {
     return <div>Product not found</div>;
   }
 
-    return (
-        <div className="mt-20">
-            <ProductDetailsClient product={singleProduct} relatedProduct={relatedProduct} />
-        </div>
-    );
+  return (
+    <div className="mt-20">
+      <ProductDetailsClient
+        product={singleProduct}
+        relatedProduct={relatedProduct}
+      />
+    </div>
+  );
 };
 
+export default ProductDetails;
