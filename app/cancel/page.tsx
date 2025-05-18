@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function CancelPage() {
   const router = useRouter();
-
   useEffect(() => {
     const timeout = setTimeout(() => {
       router.push("/cart");

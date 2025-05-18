@@ -76,7 +76,6 @@ const AllProduct = () => {
                                 ))}
                             </div>
                         </div>
-
                         <div>
                             <h3 className="text-sm font-medium text-gray-900 uppercase tracking-wide mb-3">Brand</h3>
                             <div className="flex flex-wrap gap-2">
@@ -98,7 +97,6 @@ const AllProduct = () => {
                     </div>
                 </div>
             </div>
-
             <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-16 py-12">
                 <div className="mb-8">
                     <div className="flex items-center">
@@ -113,7 +111,6 @@ const AllProduct = () => {
                         {loading ? "Finding the perfect style for you..." : `${products.length} products found`}
                     </div>
                 </div>
-
                 {loading ? (
                     <div className="flex flex-col  items-center justify-center py-32">
                         <div className="animate-spin">

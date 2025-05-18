@@ -55,7 +55,6 @@ const Faq = () => {
                 <h2 className="text-2xl font-bold mb-2">Frequently Asked Questions</h2>
                 <p className="text-gray-600">Got questions? We&apos;ve got answers.</p>
             </div>
-
             <Accordion type="single" collapsible className="w-full">
                 {items.map((item) => (
                     <AccordionItem value={item.id} key={item.id} className="py-2 border-b border-gray-200">
@@ -75,7 +74,6 @@ const Faq = () => {
                     </AccordionItem>
                 ))}
             </Accordion>
-
             <div className="mt-8 text-center">
                 <p className="text-gray-600 text-sm">
                     Still have questions? Contact our customer support team at{" "}

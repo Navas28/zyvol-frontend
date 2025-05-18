@@ -23,7 +23,6 @@ export default function HeroSection() {
             image3: "/image/nb-3.png",
             color: "bg-[#12392a]",
         },
-
         {
             id: 2,
             title: "PSG x Nike Air Max Plus\nAnthracite",
@@ -33,7 +32,6 @@ export default function HeroSection() {
             image3: "/image/paris-3.png",
             color: "bg-[#525E68]",
         },
-
         {
             id: 3,
             title: "Air Jordan Type 39\nGym Red",

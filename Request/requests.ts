@@ -1,15 +1,15 @@
 export async function getAllProducts() {
-    const productRes = await fetch("http://localhost:4000/api/products");
+    const productRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
     return productRes.json();
 }
 
 export async function getSingleProduct(id: string) {
-    const singleProductRes = await fetch(`http://localhost:4000/api/products/${id}`);
+    const singleProductRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`);
     return singleProductRes.json();
 }
 
 export async function getProductByCategory(category: string) {
-    const productByCategoryRes = await fetch(`http://localhost:4000/api/products/category/${category}`);
+    const productByCategoryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/category/${category}`);
     return productByCategoryRes.json();
 }
 
@@ -31,7 +31,7 @@ export const submitContactForm = async (formData: {
     email: string;
     message: string;
 }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type" : "application/json"},
         body: JSON.stringify(formData)

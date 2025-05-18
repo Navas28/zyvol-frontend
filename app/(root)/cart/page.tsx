@@ -29,7 +29,7 @@ const Cart = () => {
     };
 
     const handleCheckout = async () => {
-        const response = await fetch("http://localhost:4000/api/checkout/create-checkout-session", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout/create-checkout-session`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

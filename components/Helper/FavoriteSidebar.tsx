@@ -37,7 +37,6 @@ const FavoriteSidebar = ({items} : Props) => {
               Your Favorites ({items.length})
             </h2>
           </div>
-          
           <div className="flex-grow overflow-auto py-2 px-4">
             {items.map((item) => (
               <div 
@@ -52,15 +51,13 @@ const FavoriteSidebar = ({items} : Props) => {
                     height={80}
                     className="object-cover w-full h-full"
                   />
-                </div>
-                
+                </div> 
                 <div className="flex-grow">
                   <Link href={`/product/product-details/${item._id}`}>
                     <h3 className="font-medium text-gray-800 dark:text-gray-200 text-sm line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                       {item.title}
                     </h3>
                   </Link>
-                  
                   <div className="flex flex-col  mt-1 gap-2">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {item.brand}
@@ -73,12 +70,10 @@ const FavoriteSidebar = ({items} : Props) => {
                       </>
                     )}
                   </div>
-                  
                   <div className="flex items-center justify-between mt-3">
                     <p className="font-medium text-gray-800 dark:text-gray-200">
                       &#8377;{item.price.toFixed(2)}
                     </p>
-                    
                     <div className="flex items-center gap-2">
                       <button 
                         onClick={() => removeFromFavorite(item._id)}
@@ -93,7 +88,6 @@ const FavoriteSidebar = ({items} : Props) => {
               </div>
             ))}
           </div>
-          
           <div className="border-t border-gray-200 dark:border-gray-700 mt-auto px-4 py-4 space-y-4">
             <Link href="/cart" className="block w-full">
               <SheetClose className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white font-medium rounded-md py-3 text-center transition-colors">

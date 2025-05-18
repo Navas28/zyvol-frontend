@@ -29,7 +29,7 @@ export default function EditProductPage() {
 
     useEffect(() => {
         if (productId) {
-            fetch(`http://localhost:4000/api/products/${productId}`)
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setProduct(data);
@@ -72,7 +72,7 @@ export default function EditProductPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        fetch(`http://localhost:4000/api/products/${productId}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function EditProductPage() {
 
     const handleDelete = async () => {
         try {
-            const res = await fetch(`http://localhost:4000/api/products/${productId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${productId}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete product");
