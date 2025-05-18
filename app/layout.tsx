@@ -33,7 +33,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
-                <ClerkProvider>
+                <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
                     <StoreProvider>
                         <AuthSync />
                         <Navbar />
