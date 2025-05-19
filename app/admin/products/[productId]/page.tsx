@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Check, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
+import { AlertTriangle, Check, CheckCircle, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 type Product = {
     _id: string;
@@ -44,11 +45,19 @@ export default function EditProductPage() {
     }, [productId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="flex justify-center items-center min-h-[200px] text-gray-600 text-lg font-medium">
+                Loading product details...
+            </div>
+        );
     }
 
     if (!product) {
-        return <div>Product not found</div>;
+        return (
+            <div className="flex justify-center items-center min-h-[200px] text-red-600 text-lg font-semibold">
+                Product not found.
+            </div>
+        );
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
@@ -81,10 +90,14 @@ export default function EditProductPage() {
         })
             .then((response) => response.json())
             .then(() => {
-                alert("Product updated successfully");
+                toast.success("Product updated successfully", {
+                    icon: <CheckCircle size={18} className="text-green-600" />,
+                });
             })
             .catch(() => {
-                alert("Error updating product.");
+                toast.error("Error updating product.", {
+                    icon: <AlertTriangle size={18} className="text-yellow-600" />,
+                });
             });
     };
 
@@ -94,17 +107,21 @@ export default function EditProductPage() {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete product");
-            alert("Product deleted successfully");
+            toast.success("Product deleted successfully!", {
+                icon: <Trash2 size={18} className="text-red-600" />,
+            });
             router.push("/admin/products");
         } catch (error) {
             console.error(error);
-            alert("Error deleting product.");
+            toast.error("Error deleting product.", {
+                icon: <AlertTriangle size={18} className="text-yellow-600" />,
+            });
         }
     };
 
     return (
         <div className="p-8  min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer ml-10">
+            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer md:ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
@@ -150,7 +167,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={product.title}
                                     onChange={(e) => handleInputChange(e, "title")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                             <div>
@@ -159,7 +176,7 @@ export default function EditProductPage() {
                                     type="number"
                                     value={product.price}
                                     onChange={(e) => handleInputChange(e, "price")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none transition"
                                 />
                             </div>
                             <div>
@@ -168,7 +185,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={product.image}
                                     onChange={(e) => handleInputChange(e, "image")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                             <div>
@@ -177,7 +194,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={product.category}
                                     onChange={(e) => handleInputChange(e, "category")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                             <div>
@@ -186,7 +203,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={product.brand}
                                     onChange={(e) => handleInputChange(e, "brand")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                             <div>
@@ -195,7 +212,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={product.color}
                                     onChange={(e) => handleInputChange(e, "color")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                             <div>
@@ -204,7 +221,7 @@ export default function EditProductPage() {
                                     type="text"
                                     value={sizeInput}
                                     onChange={(e) => handleInputChange(e, "sizes")}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                     placeholder="e.g., 38,40,42,44"
                                 />
                             </div>
@@ -214,7 +231,7 @@ export default function EditProductPage() {
                                     value={product.description}
                                     onChange={(e) => handleInputChange(e, "description")}
                                     rows={5}
-                                    className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200"
+                                    className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none"
                                 />
                             </div>
                         </div>

@@ -44,18 +44,18 @@ export default async function AdminProductsPage() {
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="">
                                 <tr>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Image</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Image</th>
                                     <th className="px-4 md:px-6 py-4 text-left text-md font-medium uppercase tracking-wider">Name</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Price</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Category</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Brand</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Price</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Category</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Brand</th>
                                     <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {products.map((product: Product) => (
                                     <tr key={product._id} className="hover:bg-gray-50 transition duration-150">
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <Image src={product.image} alt="product image" height={120} width={120} className="object-cover rounded-md border border-gray-200" />
                                             </div>
@@ -63,15 +63,15 @@ export default async function AdminProductsPage() {
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                                             <div className="text-md font-medium">{product.title}</div>
                                         </td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap">
                                             <div className="text-md">&#8377;{product.price}</div>
                                         </td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap">
                                             <span className="px-3 py-1 inline-flex text-md leading-5 font-semibold rounded-full">
                                                 {product.category}
                                             </span>
                                         </td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-md">
                                             {product.brand}
                                         </td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md font-medium">
@@ -102,11 +102,11 @@ export default async function AdminProductsPage() {
                             <thead className="">
                                 <tr>
                                     <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Name</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Email</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Country</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Email</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Country</th>
                                     <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Status</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Intent ID</th>
-                                    <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Date</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Intent ID</th>
+                                    <th className="hidden lg:table-cell px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Date</th>
                                     <th className="px-4 md:px-6 py-4 text-left text-md md:text-xl font-medium uppercase tracking-wider">Amount (₹)</th>
                                 </tr>
                             </thead>
@@ -114,8 +114,8 @@ export default async function AdminProductsPage() {
                                 {orders.map((order: Order) => (
                                     <tr key={order._id} className="hover:bg-gray-50 transition duration-150">
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.name || "—"}</td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.email || "—"}</td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.country || "—"}</td>
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.email || "—"}</td>
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-md">{order.customerDetails?.country || "—"}</td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                                             <span className={`px-3 py-1 inline-flex text-md leading-5 font-semibold rounded-full ${
                                                 order.status === "paid" ? "text-green-600" : 
@@ -125,8 +125,8 @@ export default async function AdminProductsPage() {
                                                 {order.status}
                                             </span>
                                         </td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md font-mono">{order.paymentIntentId}</td>
-                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md">{new Date(order.createdAt).toLocaleString()}</td>
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-md font-mono">{order.paymentIntentId}</td>
+                                        <td className="hidden lg:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-md">{new Date(order.createdAt).toLocaleString()}</td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-md font-medium">&#8377;{order.amount}</td>
                                     </tr>
                                 ))}

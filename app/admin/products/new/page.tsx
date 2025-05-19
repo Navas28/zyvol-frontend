@@ -1,9 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {  ChevronLeftIcon, PackagePlus } from "lucide-react";
+import { AlertTriangle, CheckCircle, ChevronLeftIcon, PackagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function NewProductPage() {
     const router = useRouter();
@@ -67,16 +68,36 @@ export default function NewProductPage() {
         });
 
         if (res.ok) {
-            alert("Product added successfully");
-            router.push("/admin/products");
+            toast.success("Product added successfully!", {
+                icon: <CheckCircle size={18} className="text-green-600" />,
+            });
+            setForm({
+                title: "",
+                price: "",
+                description: "",
+                image: "",
+                category: "",
+                brand: "",
+                color: "",
+                sizes: "",
+                additionalImages: ["", "", ""],
+                productDetails: {
+                    manufacturer: "",
+                    countryOfOrigin: "",
+                    importedBy: "",
+                    weight: "",
+                },
+            });
         } else {
-            alert("Failed to add product");
+            toast.error("Failed to add product.", {
+                icon: <AlertTriangle size={18} className="text-red-600" />,
+            });
         }
     };
 
     return (
         <div className="p-8 min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer ml-10">
+            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer md:ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
@@ -90,11 +111,9 @@ export default function NewProductPage() {
                 <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-6">
                         <div className="mb-8">
-                            <h2 className="text-lg font-semibold mb-4 border-b border-gray-200 pb-2">
-                                Basic Information
-                            </h2>
+                            <h2 className="text-lg font-semibold mb-4 border-b border-gray-200 pb-2">Basic Information</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="col-span-2">
+                                <div className="col-span-1">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Title*</label>
                                     <input
                                         name="title"
@@ -105,7 +124,7 @@ export default function NewProductPage() {
                                         required
                                     />
                                 </div>
-                                <div>
+                                <div className="">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Price (₹)</label>
                                     <input
                                         name="price"
@@ -157,7 +176,7 @@ export default function NewProductPage() {
                                         className="w-full border border-gray-300 rounded-md px-4 py-2  outline-none transition duration-200"
                                     />
                                 </div>
-                                <div className="col-span-2">
+                                <div className="md:col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                                     <textarea
                                         name="description"
@@ -172,11 +191,9 @@ export default function NewProductPage() {
                         </div>
 
                         <div className="mb-8">
-                            <h2 className="text-lg font-semibold  mb-4 border-b border-gray-200 pb-2">
-                                Product Images
-                            </h2>
+                            <h2 className="text-lg font-semibold  mb-4 border-b border-gray-200 pb-2">Product Images</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="col-span-2">
+                                <div className="">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Main Image URL*</label>
                                     <input
                                         name="image"
@@ -266,7 +283,7 @@ export default function NewProductPage() {
                                 type="submit"
                                 className="px-6 py-3 bg-green gap-3 text-white rounded-md font-medium transition duration-200 flex items-center cursor-pointer"
                             >
-                               <PackagePlus />
+                                <PackagePlus />
                                 Add Product
                             </button>
                         </div>

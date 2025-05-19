@@ -56,7 +56,7 @@ const AllProduct = () => {
                     filterMenuOpen ? "max-h-96" : "max-h-0"
                 }`}
             >
-                <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div className="max-w-9xl mx-auto md:px-6 lg:px-8 py-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-8">
                         <div>
                             <h3 className="text-sm font-medium text-gray-900 uppercase tracking-wide mb-3">Category</h3>

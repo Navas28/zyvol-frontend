@@ -76,7 +76,7 @@ const ProductDetailsClient = ({ product }: { product: Product; relatedProduct: P
 
     return (
         <div>
-            <Button variant="link" onClick={() => router.back()} className="gap-1 cursor-pointer ml-10">
+            <Button variant="link" onClick={() => router.back()} className="gap-1 cursor-pointer md:ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>

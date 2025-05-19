@@ -50,7 +50,7 @@ const Cart = () => {
 
     return (
         <div className="mt-8 min-h-[60vh]">
-            <Button variant="link" onClick={() => router.back()} className="gap-1 cursor-pointer ml-10">
+            <Button variant="link" onClick={() => router.back()} className="gap-1 cursor-pointer md:ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>

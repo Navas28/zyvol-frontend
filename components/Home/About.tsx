@@ -10,7 +10,7 @@ const About = () => {
                         <div className="lg:max-w-xl lg:pr-5 relative">
                             <p className="flex text-sm uppercase">About Us</p>
                             <h2 className="mb-6 max-w-lg text-5xl font-light leading-snug tracking-tight  sm:text-7xl sm:leading-snug">
-                                We make you look
+                                We make you look <br />
                                 <span className="inline-block border-b-8 border-green bg-white font-bold animate__animated animate__flash">
                                     extraordinary
                                 </span>
