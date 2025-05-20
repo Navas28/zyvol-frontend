@@ -21,21 +21,16 @@ const Navbar = () => {
                 <Link href={"/"}>
                     <Image src={"/image/logo.png"} alt="logo" width={140} height={140} />
                 </Link>
-                     <SearchBox/>
-               
+                <SearchBox />
                 <div className="flex items-center gap-4">
                     <FavoriteButton />
                     <ShopingCartButton />
-
+                    <Link href="/admin/products" className="hover:underline underline-offset-2">
+                        <ShieldUser size={30} />
+                    </Link>
                     <SignedIn>
-                        {isAdmin && (
-                            <Link href="/admin/products" className="hover:underline underline-offset-2">
-                               <ShieldUser size={30}/>
-                            </Link>
-                        )}
                         <UserButton />
                     </SignedIn>
-
                     <SignedOut>
                         <SignInButton>
                             <UserIcon size={26} cursor={"pointer"} />

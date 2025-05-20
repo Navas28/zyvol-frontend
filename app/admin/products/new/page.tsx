@@ -1,13 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
 import { AlertTriangle, CheckCircle, ChevronLeftIcon, PackagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function NewProductPage() {
     const router = useRouter();
+    const { user, isLoaded } = useUser();
+    const [userRole, setUserRole] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (isLoaded && user) {
+            const role = user.publicMetadata?.role as string | null;
+            setUserRole(role);
+        }
+    }, [isLoaded, user]);
 
     const [form, setForm] = useState({
         title: "",
@@ -97,7 +107,11 @@ export default function NewProductPage() {
 
     return (
         <div className="p-8 min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer hidden md:flex ml-10">
+            <Button
+                variant="link"
+                onClick={() => router.push("/admin/products")}
+                className="gap-1 cursor-pointer hidden md:flex ml-10"
+            >
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
@@ -273,17 +287,26 @@ export default function NewProductPage() {
                         </div>
                         <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 mt-8">
                             <button
-                                type="button"
-                                onClick={() => router.push("/admin/products")}
-                                className="px-6 py-3 bg-gray-200  text-gray-800 rounded-md font-medium transition duration-200 cursor-pointer"
+                                type="submit"
+                                disabled={userRole !== "admin"}
+                                className={`flex items-center gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 mb-4 sm:mb-0 ${
+                                    userRole === "admin"
+                                        ? "bg-red text-white"
+                                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                }`}
                             >
                                 Cancel
                             </button>
                             <button
-                                type="submit"
-                                className="px-6 py-3 bg-green gap-3 text-white rounded-md font-medium transition duration-200 flex items-center cursor-pointer"
+                                type="button"
+                                disabled={userRole !== "admin"}
+                                className={`flex items-center gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 ${
+                                    userRole === "admin"
+                                        ? "bg-green text-white cursor-pointer"
+                                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                }`}
                             >
-                                <PackagePlus />
+                                <PackagePlus size={20} />
                                 Add Product
                             </button>
                         </div>

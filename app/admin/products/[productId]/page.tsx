@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
 import { AlertTriangle, Check, CheckCircle, ChevronLeftIcon, Trash2, TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -27,6 +28,15 @@ export default function EditProductPage() {
     const [sizeInput, setSizeInput] = useState("");
     const [showConfirm, setShowConfirm] = useState(false);
     const router = useRouter();
+    const {user, isLoaded} = useUser();
+    const [userRole, setUserRole] = useState<string | null>(null);
+
+    useEffect(() => {
+       if(isLoaded && user) {
+        const role = user.publicMetadata?.role as string | null;
+        setUserRole(role)
+       }
+    }, [isLoaded, user]);
 
     useEffect(() => {
         if (productId) {
@@ -121,7 +131,11 @@ export default function EditProductPage() {
 
     return (
         <div className="p-8  min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="hidden md:flex gap-1 cursor-pointer ml-10">
+            <Button
+                variant="link"
+                onClick={() => router.push("/admin/products")}
+                className="hidden md:flex gap-1 cursor-pointer ml-10"
+            >
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
@@ -238,7 +252,12 @@ export default function EditProductPage() {
                         <div className="mt-8 flex flex-col sm:flex-row sm:justify-between">
                             <button
                                 type="submit"
-                                className="flex items-center gap-2 justify-center bg-green text-white px-6 py-3 rounded-md font-medium transition duration-200 mb-4 sm:mb-0 cursor-pointer"
+                                disabled={userRole !== "admin"}
+                                className={`flex items-center gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 mb-4 sm:mb-0 ${
+                                    userRole === "admin"
+                                        ? "bg-green text-white"
+                                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                }`}
                             >
                                 <Check size={20} />
                                 Save Changes
@@ -247,7 +266,12 @@ export default function EditProductPage() {
                             <button
                                 type="button"
                                 onClick={() => setShowConfirm(true)}
-                                className="flex items-center  bg-red-600 text-white gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 cursor-pointer"
+                                disabled={userRole !== "admin"}
+                                className={`flex items-center gap-2 justify-center px-6 py-3 rounded-md font-medium transition duration-200 ${
+                                    userRole === "admin"
+                                        ? "bg-red-600 text-white cursor-pointer"
+                                        : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                }`}
                             >
                                 <Trash2 size={20} />
                                 Delete Product
