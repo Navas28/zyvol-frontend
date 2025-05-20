@@ -6,14 +6,10 @@ import React from "react";
 import SearchBox from "../Helper/SearchBox";
 import { ShieldUser, UserIcon } from "lucide-react";
 import ShopingCartButton from "../Helper/ShopingCartButton";
-import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import FavoriteButton from "../Helper/FavoriteButton";
 
 const Navbar = () => {
-    const { user, isLoaded } = useUser();
-
-    if (!isLoaded) return null;
-    const isAdmin = user?.publicMetadata?.role === "admin";
 
     return (
         <div className="h-[12vh] sticky top-0 z-10 bg-white shadow-md">

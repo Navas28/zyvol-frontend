@@ -3,7 +3,6 @@ import { Order, Product } from "@/typing";
 import {  PackagePlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export default async function AdminProductsPage() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, {
