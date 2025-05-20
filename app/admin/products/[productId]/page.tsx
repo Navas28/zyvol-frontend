@@ -121,7 +121,7 @@ export default function EditProductPage() {
 
     return (
         <div className="p-8  min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer md:ml-10">
+            <Button variant="link" onClick={() => router.push("/admin/products")} className="hidden md:flex gap-1 cursor-pointer ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
@@ -161,7 +161,7 @@ export default function EditProductPage() {
                 <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="col-span-2">
+                            <div className="">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
                                 <input
                                     type="text"
@@ -225,7 +225,7 @@ export default function EditProductPage() {
                                     placeholder="e.g., 38,40,42,44"
                                 />
                             </div>
-                            <div className="col-span-2">
+                            <div className="">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                                 <textarea
                                     value={product.description}

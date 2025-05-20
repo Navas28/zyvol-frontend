@@ -97,7 +97,7 @@ export default function NewProductPage() {
 
     return (
         <div className="p-8 min-h-screen">
-            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer md:ml-10">
+            <Button variant="link" onClick={() => router.push("/admin/products")} className="gap-1 cursor-pointer hidden md:flex ml-10">
                 <ChevronLeftIcon className="opacity-60" size={16} aria-hidden="true" />
                 Go back
             </Button>
