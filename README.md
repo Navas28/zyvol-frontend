@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zyvol – Online Sneaker Store (Frontend)
 
-## Getting Started
+Zyvol is a modern and fully responsive sneaker e-commerce website built with **Next.js**, **TailwindCSS**, **Clerk Auth**, **Cloudinary**, and **Stripe**. This repository contains the **frontend code**, providing users with an engaging and secure shopping experience.
 
-First, run the development server:
+🔗 **Live Site**: [https://zyvol.vercel.app](https://zyvol.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Zyvol-home](https://github.com/user-attachments/assets/ecdde02a-2eb4-4e7d-97cc-031b7f951859)
+![Zyvol-about](https://github.com/user-attachments/assets/37181eb3-1c99-4fb4-b8ed-dbcf3b6ce65b)
+![Zyvol-products](https://github.com/user-attachments/assets/40588d25-3e2a-4e8a-96db-26c3ed181404)
+![Zyvol-faq](https://github.com/user-attachments/assets/536df6d9-c923-4970-a2bc-52175e0a9fbd)
+![Zyvol-form](https://github.com/user-attachments/assets/6d8bc890-b244-4642-be77-3f25edc9e357)
+![Zyvol-favourite](https://github.com/user-attachments/assets/e79a6733-4705-4e4a-b0d1-7e6855e9b13a)
+![Zyvol-cart](https://github.com/user-attachments/assets/28a6f7e8-df65-46dd-b1ed-d21490be8f0c)
+![Zyvol-productAdmin](https://github.com/user-attachments/assets/be920c7d-8a2c-4c3a-bf01-ec8737995fe6)
+![Zyvol-orderAdmin](https://github.com/user-attachments/assets/35a2d6d1-e10d-49a5-bda8-b6b63b33f242)
+![Zyvol-productDetails](https://github.com/user-attachments/assets/1c4f0553-70f1-49f5-a0da-2bb48802023a)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛍️ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🖥️ Website Pages & UX
+- **Home**, **About**, **FAQ**, and **Contact** pages
+- Smooth scroll and navigation experience
+- Fully responsive on all devices
 
-## Learn More
+### 👟 Product Functionality
+- View **all sneakers** with **gender** and **brand filters**
+- Product detail page with:
+  - Multiple images
+  - Brand, price, and size selection
+  - Only authenticated users can favorite or add to cart
+- **Cart and Favorite Sidebar** accessible globally
+- Stripe checkout integration
+- Size selection required before purchase
 
-To learn more about Next.js, take a look at the following resources:
+### 🔐 Authentication
+- Integrated **Clerk authentication**
+- Only logged-in users can add to cart or favorite products
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🛠️ Admin Panel
+- Admin can:
+  - View all products with full details
+  - **Add**, **edit**, or **delete** products
+  - Upload product images via **Cloudinary**
+  - View **order history** including:
+    - Customer name
+    - Amount paid
+    - Payment status
+    - Stripe intent ID
+      
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧰 Tech Stack
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Styling**: [TailwindCSS 4](https://tailwindcss.com/)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/), [Redux Persist](https://github.com/rt2zz/redux-persist)
+- **Authentication**: [Clerk](https://clerk.dev/)
+- **Payments**: [Stripe](https://stripe.com/)
+- **Image Hosting**: [Cloudinary](https://cloudinary.com/)
+- **Icons & UI**: Lucide, Radix UI, ShadCN
+- **Image Slider**: Swiper.js
